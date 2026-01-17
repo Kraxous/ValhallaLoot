@@ -37,11 +37,11 @@ public class ConfigManager {
             plugin.getLogger().info("Updating config version to match plugin version...");
             
             // Update the config version
-            mainConfig.set("config-version", pluginVersion);
+            plugin.getConfig().set("config-version", pluginVersion);
             
             // Save the updated config
             try {
-                mainConfig.save(new File(plugin.getDataFolder(), "config.yml"));
+                plugin.saveConfig();
                 plugin.getLogger().info("Config version updated to: " + pluginVersion);
             } catch (Exception e) {
                 plugin.getLogger().warning("Failed to save updated config version: " + e.getMessage());
