@@ -1,0 +1,128 @@
+# Village Loot Table
+# Matches vanilla village chest loot from different buildings
+
+name: village
+
+first-open-only: true
+respawn-cooldown-ms: 0
+respawn-variance: 10.0
+
+pools:
+  # Food (high priority in villages)
+  food:
+    rolls: 3
+    roll-bonus: 1.0
+    entries:
+      wheat:
+        material: WHEAT
+        min-amount: 1
+        max-amount: 8
+        weight: 10.0
+        conditions: {}
+      
+      carrots:
+        material: CARROT
+        min-amount: 1
+        max-amount: 8
+        weight: 10.0
+        conditions: {}
+      
+      potato:
+        material: POTATO
+        min-amount: 1
+        max-amount: 8
+        weight: 10.0
+        conditions: {}
+      
+      bread:
+        material: BREAD
+        min-amount: 1
+        max-amount: 3
+        weight: 6.0
+        conditions: {}
+
+  # Copper items (village-exclusive)
+  copper_items:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      copper_ingot:
+        material: COPPER_INGOT
+        min-amount: 1
+        max-amount: 5
+        weight: 3.0
+        conditions: {}
+      
+      copper_spear:
+        material: COPPER_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§8Copper Spear"
+        conditions: {}
+
+  # Tools
+  equipment:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      iron_spear:
+        material: IRON_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§7Iron Spear"
+        conditions: {}
+      
+      wooden_pickaxe:
+        material: WOODEN_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}
+
+  # Emeralds (village currency)
+  valuables:
+    rolls: 2
+    roll-bonus: 0.4
+    entries:
+      emerald:
+        material: EMERALD
+        min-amount: 1
+        max-amount: 4
+        weight: 4.0
+        display-name: "§aEmerald"
+        conditions: {}
+
+  # Books and misc
+  misc:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      book:
+        material: BOOK
+        min-amount: 1
+        max-amount: 3
+        weight: 3.0
+        conditions: {}
+      
+      clock:
+        material: CLOCK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}
+      
+      compass:
+        material: COMPASS
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}

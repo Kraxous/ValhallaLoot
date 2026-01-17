@@ -1,0 +1,131 @@
+# Ancient City Loot Table
+# Deepest loot in Minecraft - ultra-rare items, Silence trim
+
+name: ancient_city
+
+first-open-only: true
+respawn-cooldown-ms: 10800000
+respawn-variance: 20.0
+
+pools:
+  # Silence armor trim - ULTRA RARE (1% vanilla rate, deepest loot)
+  armor_trims_silence:
+    rolls: 1
+    roll-bonus: 0.05
+    entries:
+      silence_trim:
+        material: SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.3
+        display-name: "§7✧ Silence Trim ✧"
+        conditions: {}
+
+  # Ward armor trim (Ancient City specialty)
+  armor_trims_ward:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      ward_trim:
+        material: WARD_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§6Ward Armor Trim"
+        conditions: {}
+
+  # Diamonds - deepest treasure
+  diamonds:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      diamond_block:
+        material: DIAMOND_BLOCK
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§b✦✦ Diamond Block ✦✦"
+        conditions: {}
+
+  # Enchanted equipment
+  enchanted_equipment:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      protection_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§5📖 Protection IV"
+        conditions:
+          - enchantments:
+              protection: 4
+
+      unbreaking_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§5📖 Unbreaking III"
+        conditions:
+          - enchantments:
+              unbreaking: 3
+
+  # Sculk items (Ancient City exclusive)
+  sculk_items:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      sculk_catalyst:
+        material: SCULK_CATALYST
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§8Sculk Catalyst"
+        conditions: {}
+      
+      sculk_sensor:
+        material: SCULK_SENSOR
+        min-amount: 1
+        max-amount: 2
+        weight: 2.5
+        display-name: "§8Sculk Sensor"
+        conditions: {}
+      
+      sculk_shriek:
+        material: SCULK_SHRIEKER
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§8Sculk Shrieker"
+        conditions: {}
+
+  # Rare equipment
+  rare_equipment:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      netherite_spear:
+        material: NETHERITE_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§8Netherite Spear"
+        conditions: {}
+      
+      diamond_sword:
+        material: DIAMOND_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§bDiamond Sword"
+        conditions: {}

@@ -1,0 +1,129 @@
+# Desert Pyramid Loot Table
+# Ancient desert structure - diamonds, Dune trim, traps
+
+name: desert_pyramid
+
+first-open-only: true
+respawn-cooldown-ms: 5400000
+respawn-variance: 20.0
+
+pools:
+  # Dune armor trim (Desert specialty)
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      dune_trim:
+        material: DUNE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§eSDune Armor Trim"
+        conditions: {}
+
+  # Diamonds - pyramid treasure
+  diamonds:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 8
+        weight: 4.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      emerald:
+        material: EMERALD
+        min-amount: 1
+        max-amount: 4
+        weight: 2.0
+        display-name: "§aEmerald"
+        conditions: {}
+
+  # Gold - desert wealth
+  gold:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 2
+        max-amount: 7
+        weight: 3.0
+        conditions: {}
+      
+      gold_block:
+        material: GOLD_BLOCK
+        min-amount: 1
+        max-amount: 1
+        weight: 0.5
+        conditions: {}
+
+  # Iron tools
+  equipment:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "Iron Pickaxe"
+        conditions: {}
+      
+      iron_spear:
+        material: IRON_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "Iron Spear"
+        conditions: {}
+
+  # Enchanted books and items
+  enchanted:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      protection_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§5📖 Protection IV"
+        conditions:
+          - enchantments:
+              protection: 4
+
+      efficiency_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§5📖 Efficiency IV"
+        conditions:
+          - enchantments:
+              efficiency: 4
+
+  # Desert specific items
+  desert_items:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      tnt:
+        material: TNT
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        display-name: "TNT (from traps)"
+        conditions: {}
+      
+      diamond_horse_armor:
+        material: DIAMOND_HORSE_ARMOR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§bDiamond Horse Armor"
+        conditions: {}

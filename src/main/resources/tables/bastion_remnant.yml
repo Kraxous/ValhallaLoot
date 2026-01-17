@@ -1,0 +1,115 @@
+# Bastion Remnant Loot Table
+# Matches vanilla bastion loot - premium nether loot
+
+name: bastion_remnant
+
+first-open-only: true
+respawn-cooldown-ms: 7200000
+respawn-variance: 20.0
+
+pools:
+  # Armor trim templates from bastion
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      snout_trim:
+        material: SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§fSnout Armor Trim"
+        conditions: {}
+
+  # Netherite upgrade (10% in treasure chests)
+  netherite_upgrade:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      netherite_upgrade:
+        material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§8Netherite Upgrade"
+        conditions: {}
+
+  # Gold (bastions have lots of gold)
+  gold:
+    rolls: 2
+    roll-bonus: 0.4
+    entries:
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 2
+        max-amount: 8
+        weight: 4.0
+        conditions: {}
+      
+      gold_block:
+        material: GOLD_BLOCK
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        conditions: {}
+
+  # Diamonds and premium materials
+  valuables:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      netherite_scrap:
+        material: NETHERITE_SCRAP
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        display-name: "§8Netherite Scrap"
+        conditions: {}
+
+  # Premium equipment
+  equipment:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      netherite_spear:
+        material: NETHERITE_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§8Netherite Spear"
+        conditions: {}
+      
+      diamond_sword:
+        material: DIAMOND_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§bDiamond Sword"
+        conditions: {}
+
+  # Rare items
+  rare_items:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      crying_obsidian:
+        material: CRYING_OBSIDIAN
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions: {}
+      
+      soul_lantern:
+        material: SOUL_LANTERN
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}

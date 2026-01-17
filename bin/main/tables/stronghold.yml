@@ -1,0 +1,133 @@
+# Stronghold Loot Table
+# Matches vanilla Minecraft stronghold chest loot
+
+name: stronghold
+
+first-open-only: true
+respawn-cooldown-ms: 5400000
+respawn-variance: 20.0
+
+pools:
+  # Enchanted books (primary loot)
+  enchanted_books:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      enchanted_book_sharpness:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Sharpness V"
+        conditions: {}
+      
+      enchanted_book_protection:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Protection IV"
+        conditions: {}
+      
+      enchanted_book_power:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Power V"
+        conditions: {}
+      
+      enchanted_book_efficiency:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Efficiency V"
+        conditions: {}
+
+  # Eye armor trim (10% chance in library chests)
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      eye_trim:
+        material: EYE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§dEye Armor Trim"
+        conditions: {}
+
+  # Diamonds and premium materials
+  valuables:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 3
+        weight: 3.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 5
+        weight: 2.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 3
+        weight: 1.5
+        conditions: {}
+
+  # Weapons and tools
+  equipment:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      diamond_spear:
+        material: DIAMOND_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§bDiamond Spear"
+        conditions: {}
+
+  # Decorative items
+  misc:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      name_tag:
+        material: NAME_TAG
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      book:
+        material: BOOK
+        min-amount: 1
+        max-amount: 3
+        weight: 1.5
+        conditions: {}

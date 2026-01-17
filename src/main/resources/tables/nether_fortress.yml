@@ -1,0 +1,108 @@
+# Nether Fortress Loot Table
+# Matches vanilla nether fortress loot
+
+name: nether_fortress
+
+first-open-only: true
+respawn-cooldown-ms: 3600000
+respawn-variance: 15.0
+
+pools:
+  # Rib armor trim (6.7% in chests)
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      rib_trim:
+        material: RIB_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Rib Armor Trim"
+        conditions: {}
+
+  # Nether-specific items
+  nether_materials:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      nether_wart:
+        material: NETHER_WART
+        min-amount: 3
+        max-amount: 10
+        weight: 4.0
+        conditions: {}
+      
+      blaze_rod:
+        material: BLAZE_ROD
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        conditions: {}
+      
+      glowstone:
+        material: GLOWSTONE
+        min-amount: 2
+        max-amount: 8
+        weight: 2.0
+        conditions: {}
+
+  # Premium materials
+  valuables:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 5
+        weight: 3.0
+        conditions: {}
+      
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions: {}
+
+  # Weapons (nether fortress mobs drop spears)
+  equipment:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      golden_spear:
+        material: GOLDEN_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§eGolden Spear"
+        conditions: {}
+      
+      iron_spear:
+        material: IRON_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§7Iron Spear"
+        conditions: {}
+
+  # Rare nether items
+  rare_nether:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      crying_obsidian:
+        material: CRYING_OBSIDIAN
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions: {}
+      
+      ancient_debris:
+        material: ANCIENT_DEBRIS
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§cAncient Debris"
+        conditions: {}

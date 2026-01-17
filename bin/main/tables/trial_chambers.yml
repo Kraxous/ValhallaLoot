@@ -33,39 +33,6 @@ pools:
         display-name: "§5Ominous Trial Key"
         conditions: {}
 
-  # Pottery shards and trial chamber decorative items
-  pottery:
-    rolls: 1
-    roll-bonus: 0.3
-    entries:
-      pottery_shard_archer:
-        material: POTTERY_SHARD_ARCHER
-        min-amount: 1
-        max-amount: 1
-        weight: 1.5
-        conditions: {}
-      
-      pottery_shard_prize:
-        material: POTTERY_SHARD_PRIZE
-        min-amount: 1
-        max-amount: 1
-        weight: 1.5
-        conditions: {}
-      
-      pottery_shard_skull:
-        material: POTTERY_SHARD_SKULL
-        min-amount: 1
-        max-amount: 1
-        weight: 1.0
-        conditions: {}
-      
-      pottery_shard_arms_up:
-        material: POTTERY_SHARD_ARMS_UP
-        min-amount: 1
-        max-amount: 1
-        weight: 1.0
-        conditions: {}
-
   # Diamonds and premium ores
   premium_gems:
     rolls: 2
@@ -84,14 +51,6 @@ pools:
         min-amount: 2
         max-amount: 5
         weight: 3.0
-        conditions: {}
-      
-      netherite_scrap:
-        material: NETHERITE_SCRAP
-        min-amount: 1
-        max-amount: 3
-        weight: 2.0
-        display-name: "§8Netherite Scrap"
         conditions: {}
 
   # Exceptional enchanted weapons (ValhallaMMO integration)
@@ -125,14 +84,6 @@ pools:
         max-amount: 1
         weight: 2.0
         display-name: "§bDiamond Spear"
-        conditions: {}
-      
-      netherite_spear:
-        material: NETHERITE_SPEAR
-        min-amount: 1
-        max-amount: 1
-        weight: 1.0
-        display-name: "§8Netherite Spear"
         conditions: {}
       
       diamond_sword:
@@ -180,27 +131,6 @@ pools:
         max-amount: 1
         weight: 1.5
         display-name: "§bDiamond Chestplate"
-        conditions: {}
-
-  # Netherite and premium items
-  netherite:
-    rolls: 1
-    roll-bonus: 0.15
-    entries:
-      netherite_upgrade_smithing_template:
-        material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
-        min-amount: 1
-        max-amount: 1
-        weight: 2.0
-        display-name: "§6Netherite Upgrade Template"
-        conditions: {}
-      
-      ancient_debris:
-        material: ANCIENT_DEBRIS
-        min-amount: 1
-        max-amount: 2
-        weight: 1.5
-        display-name: "§cAncient Debris"
         conditions: {}
 
   # Ingots and valuables

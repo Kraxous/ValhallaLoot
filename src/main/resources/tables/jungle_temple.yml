@@ -1,0 +1,130 @@
+# Jungle Temple Loot Table
+# Overgrown temple with traps - diamonds, Wild trim, tnt
+
+name: jungle_temple
+
+first-open-only: true
+respawn-cooldown-ms: 5400000
+respawn-variance: 20.0
+
+pools:
+  # Wild armor trim (Jungle specialty)
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      wild_trim:
+        material: WILD_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§2Wild Armor Trim"
+        conditions: {}
+
+  # Diamonds - jungle treasure
+  diamonds:
+    rolls: 1
+    roll-bonus: 0.25
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 8
+        weight: 4.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      emerald:
+        material: EMERALD
+        min-amount: 1
+        max-amount: 6
+        weight: 2.5
+        display-name: "§aEmerald"
+        conditions: {}
+
+  # Iron equipment
+  equipment:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "Iron Pickaxe"
+        conditions: {}
+      
+      iron_spear:
+        material: IRON_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "Iron Spear"
+        conditions: {}
+
+  # Books and enchanted items
+  enchanted:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      protection_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§5📖 Protection IV"
+        conditions:
+          - enchantments:
+              protection: 4
+
+      unbreaking_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§5📖 Unbreaking III"
+        conditions:
+          - enchantments:
+              unbreaking: 3
+
+  # Trap loot (TNT, redstone)
+  trap_items:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      tnt:
+        material: TNT
+        min-amount: 2
+        max-amount: 4
+        weight: 2.5
+        display-name: "TNT (from traps)"
+        conditions: {}
+      
+      redstone:
+        material: REDSTONE
+        min-amount: 3
+        max-amount: 12
+        weight: 2.0
+        conditions: {}
+      
+      dispenser:
+        material: DISPENSER
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "Trap Dispenser"
+        conditions: {}
+
+  # Rare finds
+  rare_items:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      golden_apple:
+        material: GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§6Golden Apple"
+        conditions: {}

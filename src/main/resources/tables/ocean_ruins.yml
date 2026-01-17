@@ -1,0 +1,121 @@
+# Ocean Ruins Loot Table
+# Underwater structures - heart of the sea, prismarine, copper
+
+name: ocean_ruins
+
+first-open-only: true
+respawn-cooldown-ms: 0
+respawn-variance: 10.0
+
+pools:
+  # Heart of the Sea (Ocean specialty - ultra-rare)
+  heart_of_sea:
+    rolls: 1
+    roll-bonus: 0.05
+    entries:
+      heart_of_the_sea:
+        material: HEART_OF_THE_SEA
+        min-amount: 1
+        max-amount: 1
+        weight: 0.4
+        display-name: "§b💜 Heart of the Sea"
+        conditions: {}
+
+  # Copper (Ocean specialty)
+  copper:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      copper_ingot:
+        material: COPPER_INGOT
+        min-amount: 1
+        max-amount: 5
+        weight: 3.0
+        conditions: {}
+      
+      copper_spear:
+        material: COPPER_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "Copper Spear"
+        conditions: {}
+
+  # Gold - underwater treasures
+  gold:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 4
+        weight: 2.5
+        conditions: {}
+
+  # Fish and marine items
+  marine_items:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      tropical_fish:
+        material: TROPICAL_FISH
+        min-amount: 2
+        max-amount: 6
+        weight: 3.0
+        conditions: {}
+      
+      pufferfish:
+        material: PUFFERFISH
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions: {}
+      
+      prismarine_shard:
+        material: PRISMARINE_SHARD
+        min-amount: 1
+        max-amount: 4
+        weight: 2.5
+        conditions: {}
+
+  # Basic equipment
+  equipment:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "Iron Pickaxe"
+        conditions: {}
+      
+      stone_spear:
+        material: STONE_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "Stone Spear"
+        conditions: {}
+
+  # Misc ocean finds
+  misc:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      nautilus_shell:
+        material: NAUTILUS_SHELL
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "Nautilus Shell"
+        conditions: {}
+      
+      seagrass:
+        material: SEAGRASS
+        min-amount: 2
+        max-amount: 5
+        weight: 2.0
+        conditions: {}

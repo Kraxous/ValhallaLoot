@@ -1,0 +1,116 @@
+# Pillager Outpost Loot Table
+# Military structure - weapons, Sentry trim
+
+name: pillager_outpost
+
+first-open-only: true
+respawn-cooldown-ms: 3600000
+respawn-variance: 20.0
+
+pools:
+  # Sentry armor trim (Pillager specialty)
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      sentry_trim:
+        material: SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§cSentry Armor Trim"
+        conditions: {}
+
+  # Iron equipment - military focus
+  iron_equipment:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      iron_sword:
+        material: IRON_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "Iron Sword"
+        conditions: {}
+      
+      iron_spear:
+        material: IRON_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "Iron Spear"
+        conditions: {}
+      
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "Iron Pickaxe"
+        conditions: {}
+
+  # Ammunition and projectiles
+  projectiles:
+    rolls: 1
+    roll-bonus: 0.4
+    entries:
+      arrow:
+        material: ARROW
+        min-amount: 8
+        max-amount: 24
+        weight: 4.0
+        conditions: {}
+      
+      crossbow:
+        material: CROSSBOW
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§aLooted Crossbow"
+        conditions: {}
+
+  # Valuables
+  valuables:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 2
+        max-amount: 5
+        weight: 3.0
+        conditions: {}
+      
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 2
+        weight: 1.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+
+  # Enchanted items
+  enchanted:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      power_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§5📖 Power IV"
+        conditions:
+          - enchantments:
+              power: 4
+      
+      sharpness_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§5📖 Sharpness IV"
+        conditions:
+          - enchantments:
+              sharpness: 4

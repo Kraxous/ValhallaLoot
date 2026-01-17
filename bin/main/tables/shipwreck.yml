@@ -1,0 +1,129 @@
+# Shipwreck Loot Table
+# Sunken ships - salvage, treasure maps, weapons
+
+name: shipwreck
+
+first-open-only: true
+respawn-cooldown-ms: 0
+respawn-variance: 10.0
+
+pools:
+  # Treasure maps - shipwreck specialty
+  maps:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      treasure_map:
+        material: FILLED_MAP
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§6Treasure Map"
+        conditions: {}
+
+  # Iron and copper equipment
+  iron_equipment:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      iron_sword:
+        material: IRON_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "Iron Sword"
+        conditions: {}
+      
+      iron_spear:
+        material: IRON_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "Iron Spear"
+        conditions: {}
+
+  # Copper items
+  copper:
+    rolls: 1
+    roll-bonus: 0.25
+    entries:
+      copper_ingot:
+        material: COPPER_INGOT
+        min-amount: 1
+        max-amount: 5
+        weight: 3.0
+        conditions: {}
+      
+      copper_spear:
+        material: COPPER_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "Copper Spear"
+        conditions: {}
+
+  # Consumables and food
+  food_supplies:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      biscuit:
+        material: WHEAT
+        min-amount: 2
+        max-amount: 8
+        weight: 3.0
+        conditions: {}
+      
+      cod:
+        material: COD
+        min-amount: 2
+        max-amount: 6
+        weight: 2.5
+        conditions: {}
+      
+      tropical_fish:
+        material: TROPICAL_FISH
+        min-amount: 1
+        max-amount: 4
+        weight: 2.0
+        conditions: {}
+
+  # Valuables and treasure
+  valuables:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions: {}
+
+  # Misc salvage
+  salvage:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      nautilus_shell:
+        material: NAUTILUS_SHELL
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "Nautilus Shell"
+        conditions: {}
+      
+      iron_nugget:
+        material: IRON_NUGGET
+        min-amount: 1
+        max-amount: 8
+        weight: 2.5
+        conditions: {}

@@ -1,0 +1,111 @@
+# Mansion (Woodland Mansion) Loot Table
+# Matches vanilla mansion loot - very rare
+
+name: mansion
+
+first-open-only: true
+respawn-cooldown-ms: 7200000
+respawn-variance: 20.0
+
+pools:
+  # Vex armor trim (50% in random loot chests)
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      vex_trim:
+        material: VEX_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§5Vex Armor Trim"
+        conditions: {}
+
+  # Diamonds and premium materials
+  valuables:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 4
+        weight: 2.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        conditions: {}
+
+  # Enchanted equipment
+  enchanted_equipment:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      enchanted_book_protection:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Protection IV"
+        conditions: {}
+      
+      diamond_sword:
+        material: DIAMOND_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§bDiamond Sword"
+        conditions: {}
+
+  # Weapons and tools
+  equipment:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        conditions: {}
+      
+      diamond_spear:
+        material: DIAMOND_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§bDiamond Spear"
+        conditions: {}
+
+  # Rare items
+  rare_items:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      name_tag:
+        material: NAME_TAG
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        conditions: {}
+      
+      saddle:
+        material: SADDLE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}

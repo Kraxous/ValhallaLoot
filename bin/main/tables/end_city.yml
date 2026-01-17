@@ -1,0 +1,121 @@
+# End City Loot Table
+# Highest tier loot - dragons domain, shulker shells, Spire trim
+
+name: end_city
+
+first-open-only: true
+respawn-cooldown-ms: 10800000
+respawn-variance: 20.0
+
+pools:
+  # Spire armor trim (End City specialty)
+  armor_trims:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      spire_trim:
+        material: SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§5Spire Armor Trim"
+        conditions: {}
+
+  # Diamonds - end rewards
+  diamonds:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 2
+        max-amount: 6
+        weight: 3.5
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      diamond_block:
+        material: DIAMOND_BLOCK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§b✦✦ Diamond Block ✦✦"
+        conditions: {}
+
+  # Shulker shells
+  shulker_shells:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      shulker_shell:
+        material: SHULKER_SHELL
+        min-amount: 1
+        max-amount: 3
+        weight: 2.5
+        display-name: "Shulker Shell"
+        conditions: {}
+
+  # Netherite items
+  netherite:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      netherite_spear:
+        material: NETHERITE_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§8Netherite Spear"
+        conditions: {}
+      
+      netherite_upgrade:
+        material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§8Netherite Upgrade"
+        conditions: {}
+
+  # Enchanted items
+  enchanted:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      sharpness_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§5📖 Sharpness V"
+        conditions:
+          - enchantments:
+              sharpness: 5
+
+      protection_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§5📖 Protection IV"
+        conditions:
+          - enchantments:
+              protection: 4
+
+  # End-specific items
+  end_items:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 2
+        max-amount: 5
+        weight: 2.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 3
+        weight: 1.5
+        conditions: {}

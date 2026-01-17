@@ -46,6 +46,23 @@ table-selection:
   vault: "trial_chambers"
   # Add more mappings as needed
 
+# Structure-based loot table selection
+# When a container is found in these structures, these loot tables are used instead
+# Structure detection works by checking biome and nearby blocks within 15-block radius
+structure-tables:
+  stronghold: "stronghold"           # Stone brick libraries at y<50
+  village: "village"                 # Wooden structures with doors/beds
+  mansion: "mansion"                 # Dark oak density check
+  nether_fortress: "nether_fortress" # Nether brick in nether world
+  bastion_remnant: "bastion_remnant" # Blackstone and gold in nether
+  ancient_city: "ancient_city"       # Sculk blocks at y<-10
+  pillager_outpost: "pillager_outpost" # Dark oak/grey concrete clusters
+  desert_pyramid: "desert_pyramid"   # Desert biome with sandstone
+  jungle_temple: "jungle_temple"     # Jungle biome with mossy stone
+  ocean_ruins: "ocean_ruins"         # Underwater sandstone/gravel
+  shipwreck: "shipwreck"             # Underwater oak/spruce wood
+  end_city: "end_city"               # End dimension with purpur blocks
+
 # ValhallaMMO Integration
 valhalla-mmo:
   # Auto-detect if enabled

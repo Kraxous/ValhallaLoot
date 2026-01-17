@@ -237,14 +237,296 @@ public class ContainerOpenListener implements Listener {
      * Configurable by block type, biome, world, etc.
      */
     private String determineTableName(Block block) {
-        // TODO: Implement more sophisticated logic based on config
-        // For now, simple mapping by block type
+        // Try structure-based detection first
+        String structureTable = detectStructureTable(block);
+        if (structureTable != null) {
+            return structureTable;
+        }
+        
+        // Fall back to block type mapping
         return switch (block.getType()) {
             case BARREL -> "common";
             case CHEST -> "common";
             case TRAPPED_CHEST -> "rare";
             default -> null;
         };
+    }
+
+    /**
+     * Detects the structure type containing this block and returns the appropriate loot table.
+     * Uses biome and nearby block patterns to identify structures.
+     */
+    private String detectStructureTable(Block block) {
+        String biome = block.getBiome().toString().toLowerCase();
+        int x = block.getX();
+        int y = block.getY();
+        int z = block.getZ();
+        
+        // Check for Stronghold (always underground, specific blocks around it)
+        if (isInStronghold(block)) {
+            return "stronghold";
+        }
+        
+        // Check for Village (lots of hay/wood/doors/beds in area)
+        if (isInVillage(block)) {
+            return "village";
+        }
+        
+        // Check for Mansion (large dark oak structures)
+        if (isInMansion(block)) {
+            return "mansion";
+        }
+        
+        // Check for Nether Fortress (nether brick, red carpet patterns)
+        if (isInNetherFortress(block)) {
+            return "nether_fortress";
+        }
+        
+        // Check for Bastion Remnant (blackstone, gold blocks)
+        if (isInBastionRemnant(block)) {
+            return "bastion_remnant";
+        }
+        
+        // Check for Ancient City (sculk, deepslate)
+        if (isInAncientCity(block)) {
+            return "ancient_city";
+        }
+        
+        // Check for Pillager Outpost (dark oak, grey concrete)
+        if (isInPillargerOutpost(block)) {
+            return "pillager_outpost";
+        }
+        
+        // Check for Desert Pyramid (sandstone, terracotta)
+        if (isInDesertPyramid(block)) {
+            return "desert_pyramid";
+        }
+        
+        // Check for Jungle Temple (mossy stone, vines)
+        if (isInJungleTemple(block)) {
+            return "jungle_temple";
+        }
+        
+        // Check for Ocean Ruins (sandstone, gravel underwater)
+        if (isInOceanRuins(block)) {
+            return "ocean_ruins";
+        }
+        
+        // Check for Shipwreck (oak/spruce wood, specific patterns)
+        if (isInShipwreck(block)) {
+            return "shipwreck";
+        }
+        
+        // Check for End City (purpur blocks, end rods)
+        if (isInEndCity(block)) {
+            return "end_city";
+        }
+        
+        return null;
+    }
+
+    private boolean isInStronghold(Block block) {
+        // Strongholds have stone brick, dark oak, silverfish spawners
+        // Usually deep underground (y < 40)
+        int checkRadius = 15;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                String type = check.getType().toString();
+                if (type.contains("STONE_BRICK") || type.contains("DARK_OAK")) {
+                    return block.getY() < 50; // Strongholds are underground
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isInVillage(Block block) {
+        // Villages have lots of wooden structures, hay, doors, composter, beds
+        int checkRadius = 20;
+        int structureBlocks = 0;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                String type = check.getType().toString();
+                if (type.contains("LOG") || type.contains("DOOR") || type.contains("BED") || type.contains("HAY")) {
+                    structureBlocks++;
+                }
+            }
+        }
+        return structureBlocks > 5;
+    }
+
+    private boolean isInMansion(Block block) {
+        // Mansions are made of dark oak wood
+        int checkRadius = 15;
+        int darkOakCount = 0;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                if (check.getType().toString().contains("DARK_OAK")) {
+                    darkOakCount++;
+                }
+            }
+        }
+        return darkOakCount > 8;
+    }
+
+    private boolean isInNetherFortress(Block block) {
+        // Nether fortresses are made of nether brick, red carpet
+        if (!block.getWorld().getName().toLowerCase().contains("nether")) {
+            return false;
+        }
+        int checkRadius = 15;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                String type = check.getType().toString();
+                if (type.contains("NETHER_BRICK")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isInBastionRemnant(Block block) {
+        // Bastion remnants are made of blackstone, gold blocks
+        if (!block.getWorld().getName().toLowerCase().contains("nether")) {
+            return false;
+        }
+        int checkRadius = 15;
+        int blackstoneCount = 0;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                String type = check.getType().toString();
+                if (type.contains("BLACKSTONE") || type.contains("GOLD_BLOCK")) {
+                    blackstoneCount++;
+                }
+            }
+        }
+        return blackstoneCount > 3;
+    }
+
+    private boolean isInAncientCity(Block block) {
+        // Ancient cities have sculk blocks, deep below Y=0
+        int checkRadius = 20;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                if (check.getType().toString().contains("SCULK")) {
+                    return block.getY() < -10;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isInPillargerOutpost(Block block) {
+        // Pillager outposts have dark oak wood, grey concrete, flags
+        int checkRadius = 15;
+        int outpostBlocks = 0;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                String type = check.getType().toString();
+                if (type.contains("DARK_OAK") || type.contains("GREY_CONCRETE")) {
+                    outpostBlocks++;
+                }
+            }
+        }
+        return outpostBlocks > 5;
+    }
+
+    private boolean isInDesertPyramid(Block block) {
+        // Desert pyramids are sandstone, terracotta, in desert biome
+        String biome = block.getBiome().toString().toLowerCase();
+        if (!biome.contains("desert")) {
+            return false;
+        }
+        int checkRadius = 15;
+        int sandstoneCount = 0;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                String type = check.getType().toString();
+                if (type.contains("SANDSTONE") || type.contains("TERRACOTTA")) {
+                    sandstoneCount++;
+                }
+            }
+        }
+        return sandstoneCount > 5;
+    }
+
+    private boolean isInJungleTemple(Block block) {
+        // Jungle temples are mossy stone, vines, in jungle
+        String biome = block.getBiome().toString().toLowerCase();
+        if (!biome.contains("jungle")) {
+            return false;
+        }
+        int checkRadius = 15;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                String type = check.getType().toString();
+                if (type.contains("MOSSY_STONE") || type.equals("VINE")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isInOceanRuins(Block block) {
+        // Ocean ruins are underwater with sandstone, gravel
+        if (block.getType().toString().contains("WATER")) {
+            int checkRadius = 15;
+            for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+                for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                    Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                    String type = check.getType().toString();
+                    if (type.contains("SANDSTONE") || type.equals("GRAVEL")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isInShipwreck(Block block) {
+        // Shipwrecks are underwater with spruce/oak wood
+        if (block.getType().toString().contains("WATER")) {
+            int checkRadius = 10;
+            for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+                for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                    Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                    String type = check.getType().toString();
+                    if (type.contains("OAK") || type.contains("SPRUCE")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isInEndCity(Block block) {
+        // End cities have purpur blocks, end rods
+        if (!block.getWorld().getName().toLowerCase().contains("end")) {
+            return false;
+        }
+        int checkRadius = 15;
+        for (int dx = -checkRadius; dx <= checkRadius; dx++) {
+            for (int dz = -checkRadius; dz <= checkRadius; dz++) {
+                Block check = block.getWorld().getBlockAt(block.getX() + dx, block.getY(), block.getZ() + dz);
+                if (check.getType().toString().contains("PURPUR")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
