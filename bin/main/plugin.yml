@@ -17,16 +17,13 @@ commands:
   valloot:
     description: Main command for ValhallaLoot
     permission: valloot.admin
-    usage: /valloot <reload|debug|test|convert|restore>
+    usage: /valloot <reload|test|convert|restore|status|bg-status>
     aliases:
       - vl
 
 permissions:
   valloot.admin:
     description: Allows use of all ValhallaLoot commands
-    default: op
-  valloot.debug:
-    description: Allows toggling debug mode
     default: op
   valloot.bypass:
     description: Allows bypassing first-open loot gating
