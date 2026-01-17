@@ -36,6 +36,8 @@ public class ContainerOpenListener implements Listener {
     private final ValhallaLootPlugin plugin;
     private final ConcurrentHashMap<String, CompletableFuture<?>> inFlightLootGeneration;
     private final RateLimiter debugLimiter = new RateLimiter(500); // Max 1 debug msg per 500ms
+    // BUGFIX #1: Structure detection caching to avoid repeated async calls
+    private final ConcurrentHashMap<String, String> structureCache = new ConcurrentHashMap<>();
 
     // Container types that should have loot
     private static final Set<Material> LOOT_CONTAINERS = Set.of(
@@ -139,11 +141,16 @@ public class ContainerOpenListener implements Listener {
             }
         }
 
-        // Coalesce duplicate requests for same container
+        // BUGFIX #2: Handle per-player simultaneous opens properly
         CompletableFuture<?> existing = inFlightLootGeneration.get(containerKey);
         if (existing != null && !existing.isDone()) {
             // Loot generation is already in progress for this container
-            // Just wait for it to complete (we don't block; we rely on inventory listener)
+            // Chain another generation after the first completes for the second player
+            existing.thenRun(() -> {
+                if (Bukkit.getPlayer(context.getPlayerUUID()) != null) {
+                    generateLootAsync(containerKey, table, context, block);
+                }
+            });
             return;
         }
 
@@ -199,6 +206,14 @@ public class ContainerOpenListener implements Listener {
      * MUST be called on main thread (Bukkit API access).
      */
     private void applyLootToContainer(Block block, LootRollResult result, String containerKey) {
+        // BUGFIX #5: Check if chunk is still loaded before accessing block state
+        if (!block.getChunk().isLoaded()) {
+            plugin.debug(dev.waystone.vallhaloot.util.DebugLevel.HIGH,
+                "Chunk unloaded before loot callback; skipping application at %s", block.getLocation());
+            inFlightLootGeneration.remove(containerKey);
+            return;
+        }
+        
         if (block.getState() instanceof BlockInventoryHolder) {
             BlockInventoryHolder holder = (BlockInventoryHolder) block.getState();
             Inventory realInventory = holder.getInventory();
@@ -235,12 +250,27 @@ public class ContainerOpenListener implements Listener {
     /**
      * Determine which loot table should be used for this block.
      * Configurable by block type, biome, world, etc.
+     * BUGFIX #1: Split into fast (main thread) and slow (async) detection
      */
     private String determineTableName(Block block) {
-        // Try structure-based detection first
-        String structureTable = detectStructureTable(block);
+        // Try fast structure detection first (minimal main thread impact)
+        String structureTable = detectStructureTableFast(block);
         if (structureTable != null) {
             return structureTable;
+        }
+        
+        // Queue detailed detection async (avoid main thread freeze)
+        String blockKey = block.getX() + ":" + block.getY() + ":" + block.getZ();
+        if (!structureCache.containsKey(blockKey)) {
+            plugin.getSchedulerHelper().runAsync(() -> {
+                String slow = detectStructureTableSlow(block);
+                if (slow != null) {
+                    structureCache.put(blockKey, slow);
+                }
+            });
+        } else {
+            // Use cached result if available
+            return structureCache.get(blockKey);
         }
         
         // Fall back to block type mapping
@@ -253,10 +283,35 @@ public class ContainerOpenListener implements Listener {
     }
 
     /**
-     * Detects the structure type containing this block and returns the appropriate loot table.
-     * Uses biome and nearby block patterns to identify structures.
+     * Fast structure detection (main thread safe, minimal performance impact).
+     * Only checks immediate surroundings and common patterns.
      */
-    private String detectStructureTable(Block block) {
+    private String detectStructureTableFast(Block block) {
+        String biome = block.getBiome().toString().toLowerCase();
+        
+        // Quick checks that don't require scanning
+        if (biome.contains("desert")) {
+            return "desert_pyramid";
+        }
+        if (biome.contains("jungle")) {
+            return "jungle_temple";
+        }
+        if (block.getWorld().getName().toLowerCase().contains("nether")) {
+            return "nether_fortress";  // Nether biome → likely fortress/bastion
+        }
+        if (block.getWorld().getName().toLowerCase().contains("end")) {
+            return "end_city";
+        }
+        
+        return null;
+    }
+
+    /**
+     * Slow/detailed structure detection (async only).
+     * Uses extensive block scanning within a 15-block radius.
+     * MUST only be called from async context.
+     */
+    private String detectStructureTableSlow(Block block) {
         String biome = block.getBiome().toString().toLowerCase();
         int x = block.getX();
         int y = block.getY();

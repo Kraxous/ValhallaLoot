@@ -18,13 +18,26 @@ import java.util.concurrent.ConcurrentHashMap;
 public class StorageManager {
     private final ValhallaLootPlugin plugin;
     private final Connection dbConnection;
-    private final ConcurrentHashMap<String, Long> openMarkers; // Cache for performance (global)
-    private final ConcurrentHashMap<String, ConcurrentHashMap<UUID, Long>> playerOpenMarkers; // per-player cache
+    // BUGFIX #4: Bound memory caches with LRU eviction (max 100k entries each)
+    private final java.util.Map<String, Long> openMarkers;
+    private final java.util.Map<String, ConcurrentHashMap<UUID, Long>> playerOpenMarkers;
 
     public StorageManager(ValhallaLootPlugin plugin) {
         this.plugin = plugin;
-        this.openMarkers = new ConcurrentHashMap<>();
-        this.playerOpenMarkers = new ConcurrentHashMap<>();
+        this.openMarkers = java.util.Collections.synchronizedMap(
+            new java.util.LinkedHashMap<String, Long>(16, 0.75f, true) {
+                protected boolean removeEldestEntry(java.util.Map.Entry eldest) {
+                    return size() > 100000;
+                }
+            }
+        );
+        this.playerOpenMarkers = java.util.Collections.synchronizedMap(
+            new java.util.LinkedHashMap<String, ConcurrentHashMap<UUID, Long>>(16, 0.75f, true) {
+                protected boolean removeEldestEntry(java.util.Map.Entry eldest) {
+                    return size() > 100000;
+                }
+            }
+        );
         this.dbConnection = initializeDatabase();
         loadAllMarkers();
     }

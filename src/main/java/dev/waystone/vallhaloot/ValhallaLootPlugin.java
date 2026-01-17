@@ -118,6 +118,8 @@ public class ValhallaLootPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // BUGFIX #3: Unregister all listeners to prevent double-event handling on reload
+        org.bukkit.event.HandlerList.unregisterAll(this);
         if (storageManager != null) {
             storageManager.shutdown();
         }
