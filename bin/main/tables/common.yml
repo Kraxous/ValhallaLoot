@@ -1,0 +1,86 @@
+# Common Loot Table
+# This table is used for standard containers like chests and barrels
+
+name: common
+
+# Only generate loot the first time a player opens this container
+first-open-only: true
+
+# Respawn cooldown (in milliseconds)
+respawn-cooldown-ms: 0
+respawn-variance: 10.0
+
+# Loot pools - each pool is rolled independently
+pools:
+  # Basic items pool
+  basic:
+    rolls: 2
+    roll-bonus: 0.0
+    entries:
+      stone:
+        material: STONE
+        min-amount: 2
+        max-amount: 8
+        weight: 10.0
+        conditions: {}
+      
+      dirt:
+        material: DIRT
+        min-amount: 1
+        max-amount: 4
+        weight: 8.0
+        conditions: {}
+      
+      coal:
+        material: COAL
+        min-amount: 1
+        max-amount: 3
+        weight: 5.0
+        conditions: {}
+
+  # Valuable items pool
+  valuables:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      iron_ore:
+        material: IRON_ORE
+        min-amount: 1
+        max-amount: 2
+        weight: 3.0
+        conditions: {}
+      
+      copper_ore:
+        material: COPPER_ORE
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions: {}
+      
+      emerald:
+        material: EMERALD
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}
+
+  # Night-only items pool
+  night:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      glowstone:
+        material: GLOWSTONE
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        conditions:
+          time: "night-only"
+      
+      dark_oak_log:
+        material: DARK_OAK_LOG
+        min-amount: 2
+        max-amount: 4
+        weight: 1.0
+        conditions:
+          time: "night-only"

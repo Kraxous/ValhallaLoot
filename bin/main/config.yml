@@ -1,0 +1,55 @@
+# ValhallaLoot Configuration
+# Global settings for the ValhallaLoot plugin
+
+# Debug level: controls verbosity of logging
+# Options: LOWEST (dev), LOW (debug), NORMAL (info), HIGH (warn), HIGHEST (user-only)
+debug-level: "NORMAL"
+
+# Automatic background conversion of containers on chunk load
+# When enabled, newly loaded chunks are scanned and any vanilla containers found are converted
+# This provides automatic, low-overhead conversion without manual commands
+# Runs asynchronously to avoid server strain
+# NOTE: Only converts in worlds that have already been converted via /valloot convert
+auto-convert-on-chunk-load: true
+
+# Which worlds should have auto-conversion enabled
+# Options:
+#   - "all": Convert containers in all worlds
+#   - ["world", "world_nether"]: Convert only specified worlds (YAML list)
+#   - Remove this line: Defaults to "all" if not specified
+auto-convert-worlds:
+  - "world"
+  # - "world_nether"
+  # - "custom_world"
+
+# Container settings
+containers:
+  # First-open only: if true, containers will only generate loot the first time they're opened
+  first-open-only: true
+  # Per-player loot: if true, first-open is tracked per player (instanced loot)
+  per-player-loot: false
+  
+  # Respawn settings for containers (if supported)
+  respawn:
+    enabled: true
+    # Cooldown in milliseconds (1 hour = 3600000)
+    cooldown-ms: 3600000
+    # Variance percentage (0-100), applied as ± percentage
+    variance: 10.0
+
+# Table selection (maps container types to loot tables)
+table-selection:
+  chest: "common"
+  barrel: "common"
+  trapped_chest: "rare"
+  # Add more mappings as needed
+
+# ValhallaMMO Integration
+valhalla-mmo:
+  # Auto-detect if enabled
+  auto-detect: true
+  
+  # Skill thresholds for bonus loot (example)
+  bonus-tables-by-skill:
+    mining: 10  # Players with Mining >= 10 get bonus mining drops
+    treasure-hunting: 15

@@ -1,0 +1,78 @@
+# Rare Loot Table
+# This table is used for trapped chests and other high-value containers
+
+name: rare
+
+# Only generate loot the first time a player opens this container
+first-open-only: true
+
+# Respawn cooldown (in milliseconds) - 1 hour
+respawn-cooldown-ms: 3600000
+respawn-variance: 15.0
+
+# Loot pools
+pools:
+  # Rare gems and ores
+  gems:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        display-name: "§b✦ Diamond ✦"
+        lore:
+          - "§7A precious gem"
+        conditions: {}
+      
+      amethyst_shard:
+        material: AMETHYST_SHARD
+        min-amount: 2
+        max-amount: 8
+        weight: 1.5
+        display-name: "§5Amethyst Shard"
+        conditions: {}
+      
+      lapis_lazuli:
+        material: LAPIS_LAZULI
+        min-amount: 4
+        max-amount: 12
+        weight: 2.0
+        conditions: {}
+
+  # Enchanted books pool
+  enchantments:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      enchanted_book_protection:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Contains an enchantment"
+        conditions: {}
+
+  # Valuables pool
+  treasure:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 2
+        max-amount: 5
+        weight: 2.0
+        conditions: {}
+      
+      netherite_scrap:
+        material: NETHERITE_SCRAP
+        min-amount: 1
+        max-amount: 2
+        weight: 0.5
+        display-name: "§8Netherite Scrap"
+        conditions: {}

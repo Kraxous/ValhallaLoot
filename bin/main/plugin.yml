@@ -1,0 +1,36 @@
+name: ValhallaLoot
+version: 1.0.0
+main: dev.waystone.vallhaloot.ValhallaLootPlugin
+description: ValhallaMMO addon providing custom, refreshable, per-player style loot for vanilla containers
+authors:
+  - Waystone Dev
+website: https://github.com/Athlaeos/ValhallaMMO
+
+api-version: 1.21
+
+depends:
+  - ValhallaMMO
+
+softdepend: []
+
+commands:
+  valloot:
+    description: Main command for ValhallaLoot
+    permission: valloot.admin
+    usage: /valloot <reload|debug|test|convert|restore>
+    aliases:
+      - vl
+
+permissions:
+  valloot.admin:
+    description: Allows use of all ValhallaLoot commands
+    default: op
+  valloot.debug:
+    description: Allows toggling debug mode
+    default: op
+  valloot.bypass:
+    description: Allows bypassing first-open loot gating
+    default: op
+  valloot.table.*:
+    description: Access to all loot tables
+    default: true
