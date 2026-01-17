@@ -24,11 +24,41 @@ public class ConfigManager {
         this.plugin = plugin;
     }
 
+    /**
+     * Check and update the config version to match the plugin version.
+     * This allows automatic config updates when the plugin is upgraded.
+     */
+    private void checkAndUpdateConfigVersion() {
+        String pluginVersion = plugin.getDescription().getVersion();
+        String configVersion = mainConfig.getString("config-version", "0.0.0");
+        
+        if (!configVersion.equals(pluginVersion)) {
+            plugin.getLogger().info("Config version mismatch (config: " + configVersion + ", plugin: " + pluginVersion + ")");
+            plugin.getLogger().info("Updating config version to match plugin version...");
+            
+            // Update the config version
+            mainConfig.set("config-version", pluginVersion);
+            
+            // Save the updated config
+            try {
+                mainConfig.save(new File(plugin.getDataFolder(), "config.yml"));
+                plugin.getLogger().info("Config version updated to: " + pluginVersion);
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to save updated config version: " + e.getMessage());
+            }
+        } else {
+            plugin.getLogger().info("Config version matches plugin version: " + pluginVersion);
+        }
+    }
+
     public boolean loadConfig() {
         try {
             // Load main config
             plugin.getConfig().load(new File(plugin.getDataFolder(), "config.yml"));
             this.mainConfig = plugin.getConfig();
+
+            // Check and update config version
+            checkAndUpdateConfigVersion();
 
             // Read global flags
             ConfigurationSection containers = mainConfig.getConfigurationSection("containers");

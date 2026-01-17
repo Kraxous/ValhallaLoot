@@ -1,0 +1,120 @@
+# Buried Treasure Loot Table
+# Found in beaches and underwater, contains valuable ocean-themed loot
+
+name: buried_treasure
+
+first-open-only: true
+respawn-cooldown-ms: 7200000
+respawn-variance: 15.0
+
+pools:
+  # Heart of the Sea (guaranteed)
+  treasure_core:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      heart_of_the_sea:
+        material: HEART_OF_THE_SEA
+        min-amount: 1
+        max-amount: 1
+        weight: 10.0
+        display-name: "§b✦ Heart of the Sea ✦"
+        conditions: {}
+
+  # Diamonds and emeralds
+  precious_gems:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 4
+        weight: 5.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      emerald:
+        material: EMERALD
+        min-amount: 4
+        max-amount: 8
+        weight: 4.0
+        display-name: "§a✦ Emerald ✦"
+        conditions: {}
+
+  # Iron and gold ingots
+  metals:
+    rolls: 3
+    roll-bonus: 0.8
+    entries:
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 8
+        weight: 6.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 5
+        weight: 5.0
+        conditions: {}
+
+  # TNT and prismarine
+  special_materials:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      tnt:
+        material: TNT
+        min-amount: 1
+        max-amount: 2
+        weight: 3.0
+        conditions: {}
+      
+      prismarine_crystals:
+        material: PRISMARINE_CRYSTALS
+        min-amount: 1
+        max-amount: 5
+        weight: 4.0
+        conditions: {}
+
+  # Cooked fish and food
+  food:
+    rolls: 2
+    roll-bonus: 0.4
+    entries:
+      cooked_cod:
+        material: COOKED_COD
+        min-amount: 2
+        max-amount: 4
+        weight: 5.0
+        conditions: {}
+      
+      cooked_salmon:
+        material: COOKED_SALMON
+        min-amount: 2
+        max-amount: 4
+        weight: 5.0
+        conditions: {}
+
+  # Leather and armor materials
+  armor_materials:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      leather:
+        material: LEATHER
+        min-amount: 1
+        max-amount: 3
+        weight: 4.0
+        conditions: {}
+      
+      chainmail_helmet:
+        material: CHAINMAIL_HELMET
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§fChainmail Helmet"
+        conditions: {}

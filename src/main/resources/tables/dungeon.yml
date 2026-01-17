@@ -1,0 +1,209 @@
+# Dungeon Loot Table
+# Found in monster spawner rooms, contains basic survival and combat items
+
+name: dungeon
+
+first-open-only: true
+respawn-cooldown-ms: 3600000
+respawn-variance: 10.0
+
+pools:
+  # Basic weapons and armor
+  equipment:
+    rolls: 2
+    roll-bonus: 0.4
+    entries:
+      iron_sword:
+        material: IRON_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      iron_helmet:
+        material: IRON_HELMET
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        conditions: {}
+      
+      iron_chestplate:
+        material: IRON_CHESTPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      chainmail_chestplate:
+        material: CHAINMAIL_CHESTPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§fChainmail Chestplate"
+        conditions: {}
+
+  # Food supplies
+  food:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      bread:
+        material: BREAD
+        min-amount: 1
+        max-amount: 3
+        weight: 7.0
+        conditions: {}
+      
+      wheat:
+        material: WHEAT
+        min-amount: 1
+        max-amount: 4
+        weight: 6.0
+        conditions: {}
+      
+      beetroot:
+        material: BEETROOT
+        min-amount: 1
+        max-amount: 3
+        weight: 5.0
+        conditions: {}
+
+  # Redstone and materials
+  materials:
+    rolls: 3
+    roll-bonus: 0.6
+    entries:
+      redstone:
+        material: REDSTONE
+        min-amount: 1
+        max-amount: 4
+        weight: 6.0
+        conditions: {}
+      
+      coal:
+        material: COAL
+        min-amount: 1
+        max-amount: 4
+        weight: 6.0
+        conditions: {}
+      
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 4
+        weight: 5.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 3
+        weight: 3.0
+        conditions: {}
+      
+      string:
+        material: STRING
+        min-amount: 1
+        max-amount: 8
+        weight: 5.0
+        conditions: {}
+      
+      gunpowder:
+        material: GUNPOWDER
+        min-amount: 1
+        max-amount: 4
+        weight: 4.0
+        conditions: {}
+
+  # Music discs
+  music_discs:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      music_disc_13:
+        material: MUSIC_DISC_13
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§aMusic Disc"
+        lore:
+          - "§7C418 - 13"
+        conditions: {}
+      
+      music_disc_cat:
+        material: MUSIC_DISC_CAT
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§aMusic Disc"
+        lore:
+          - "§7C418 - cat"
+        conditions: {}
+
+  # Rare items
+  rare:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      name_tag:
+        material: NAME_TAG
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Name Tag"
+        conditions: {}
+      
+      golden_apple:
+        material: GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Golden Apple"
+        conditions: {}
+      
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.5
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+      
+      saddle:
+        material: SADDLE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Saddle"
+        conditions: {}
+      
+      horse_armor_iron:
+        material: IRON_HORSE_ARMOR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§fIron Horse Armor"
+        conditions: {}
+      
+      horse_armor_gold:
+        material: GOLDEN_HORSE_ARMOR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§6Golden Horse Armor"
+        conditions: {}
+
+  # Enchanted books
+  enchantments:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      enchanted_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Protection II"
+        conditions: {}

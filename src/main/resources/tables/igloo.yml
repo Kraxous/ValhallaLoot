@@ -1,0 +1,140 @@
+# Igloo Loot Table
+# Found in igloo basement chests, contains brewing and survival items
+
+name: igloo
+
+first-open-only: true
+respawn-cooldown-ms: 3600000
+respawn-variance: 10.0
+
+pools:
+  # Golden apple (guaranteed in igloo basement)
+  special_food:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      golden_apple:
+        material: GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 10.0
+        display-name: "§6Golden Apple"
+        conditions: {}
+
+  # Brewing materials
+  brewing:
+    rolls: 2
+    roll-bonus: 0.4
+    entries:
+      glass_bottle:
+        material: GLASS_BOTTLE
+        min-amount: 1
+        max-amount: 3
+        weight: 5.0
+        conditions: {}
+      
+      blaze_powder:
+        material: BLAZE_POWDER
+        min-amount: 1
+        max-amount: 2
+        weight: 3.0
+        conditions: {}
+      
+      sugar:
+        material: SUGAR
+        min-amount: 1
+        max-amount: 3
+        weight: 4.0
+        conditions: {}
+      
+      spider_eye:
+        material: SPIDER_EYE
+        min-amount: 1
+        max-amount: 2
+        weight: 3.0
+        conditions: {}
+
+  # Food and survival supplies
+  survival:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      coal:
+        material: COAL
+        min-amount: 1
+        max-amount: 4
+        weight: 6.0
+        conditions: {}
+      
+      apple:
+        material: APPLE
+        min-amount: 1
+        max-amount: 3
+        weight: 5.0
+        conditions: {}
+      
+      wheat:
+        material: WHEAT
+        min-amount: 2
+        max-amount: 3
+        weight: 5.0
+        conditions: {}
+      
+      rotten_flesh:
+        material: ROTTEN_FLESH
+        min-amount: 1
+        max-amount: 1
+        weight: 7.0
+        conditions: {}
+
+  # Stone tools and blocks
+  tools_and_blocks:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      stone_axe:
+        material: STONE_AXE
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      stone_pickaxe:
+        material: STONE_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      stone_button:
+        material: STONE_BUTTON
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      redstone_torch:
+        material: REDSTONE_TORCH
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+
+  # Snow and ice themed items
+  cold_materials:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      snow_block:
+        material: SNOW_BLOCK
+        min-amount: 2
+        max-amount: 8
+        weight: 5.0
+        conditions: {}
+      
+      snowball:
+        material: SNOWBALL
+        min-amount: 8
+        max-amount: 16
+        weight: 4.0
+        conditions: {}

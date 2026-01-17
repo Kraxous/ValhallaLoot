@@ -1,0 +1,166 @@
+# Ruined Portal Loot Table
+# Found in ruined portal chests, contains nether-related items and tools
+
+name: ruined_portal
+
+first-open-only: true
+respawn-cooldown-ms: 3600000
+respawn-variance: 10.0
+
+pools:
+  # Gold-related items (common in ruined portals)
+  gold:
+    rolls: 3
+    roll-bonus: 0.6
+    entries:
+      gold_nugget:
+        material: GOLD_NUGGET
+        min-amount: 4
+        max-amount: 24
+        weight: 8.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 2
+        max-amount: 8
+        weight: 6.0
+        conditions: {}
+      
+      golden_apple:
+        material: GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Golden Apple"
+        conditions: {}
+      
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.5
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+
+  # Golden tools and armor
+  golden_equipment:
+    rolls: 2
+    roll-bonus: 0.4
+    entries:
+      golden_sword:
+        material: GOLDEN_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      golden_axe:
+        material: GOLDEN_AXE
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      golden_pickaxe:
+        material: GOLDEN_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      golden_helmet:
+        material: GOLDEN_HELMET
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      golden_chestplate:
+        material: GOLDEN_CHESTPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+
+  # Obsidian and portal materials
+  portal_materials:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      obsidian:
+        material: OBSIDIAN
+        min-amount: 1
+        max-amount: 2
+        weight: 5.0
+        conditions: {}
+      
+      crying_obsidian:
+        material: CRYING_OBSIDIAN
+        min-amount: 1
+        max-amount: 5
+        weight: 4.0
+        conditions: {}
+      
+      fire_charge:
+        material: FIRE_CHARGE
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      flint_and_steel:
+        material: FLINT_AND_STEEL
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+
+  # Miscellaneous items
+  misc:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      iron_nugget:
+        material: IRON_NUGGET
+        min-amount: 9
+        max-amount: 18
+        weight: 6.0
+        conditions: {}
+      
+      flint:
+        material: FLINT
+        min-amount: 1
+        max-amount: 4
+        weight: 5.0
+        conditions: {}
+      
+      bell:
+        material: BELL
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Bell"
+        conditions: {}
+      
+      clock:
+        material: CLOCK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+
+  # Enchanted books
+  enchantments:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      enchanted_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Fire Protection III"
+        conditions: {}

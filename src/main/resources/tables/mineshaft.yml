@@ -1,0 +1,159 @@
+# Mineshaft Loot Table
+# Found in abandoned mineshaft chests, contains mining-related items
+
+name: mineshaft
+
+first-open-only: true
+respawn-cooldown-ms: 3600000
+respawn-variance: 10.0
+
+pools:
+  # Rails and mining equipment
+  mining_equipment:
+    rolls: 3
+    roll-bonus: 0.6
+    entries:
+      rail:
+        material: RAIL
+        min-amount: 4
+        max-amount: 8
+        weight: 6.0
+        conditions: {}
+      
+      powered_rail:
+        material: POWERED_RAIL
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        conditions: {}
+      
+      minecart:
+        material: MINECART
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+
+  # Torches and light sources
+  lighting:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      torch:
+        material: TORCH
+        min-amount: 1
+        max-amount: 16
+        weight: 8.0
+        conditions: {}
+
+  # Ores and materials
+  materials:
+    rolls: 3
+    roll-bonus: 0.5
+    entries:
+      coal:
+        material: COAL
+        min-amount: 3
+        max-amount: 8
+        weight: 8.0
+        conditions: {}
+      
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 5
+        weight: 5.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 3
+        weight: 3.0
+        conditions: {}
+      
+      lapis_lazuli:
+        material: LAPIS_LAZULI
+        min-amount: 4
+        max-amount: 9
+        weight: 4.0
+        conditions: {}
+      
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      redstone:
+        material: REDSTONE
+        min-amount: 4
+        max-amount: 9
+        weight: 5.0
+        conditions: {}
+
+  # Food supplies
+  food:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      bread:
+        material: BREAD
+        min-amount: 1
+        max-amount: 3
+        weight: 6.0
+        conditions: {}
+      
+      melon_seeds:
+        material: MELON_SEEDS
+        min-amount: 2
+        max-amount: 4
+        weight: 4.0
+        conditions: {}
+      
+      pumpkin_seeds:
+        material: PUMPKIN_SEEDS
+        min-amount: 2
+        max-amount: 4
+        weight: 4.0
+        conditions: {}
+      
+      beetroot_seeds:
+        material: BEETROOT_SEEDS
+        min-amount: 2
+        max-amount: 4
+        weight: 4.0
+        conditions: {}
+
+  # Name tags and rare items
+  special:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      name_tag:
+        material: NAME_TAG
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Name Tag"
+        conditions: {}
+      
+      golden_apple:
+        material: GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§6Golden Apple"
+        conditions: {}
+      
+      enchanted_book:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Efficiency III"
+        conditions: {}

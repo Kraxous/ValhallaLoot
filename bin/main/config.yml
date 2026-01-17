@@ -1,6 +1,9 @@
 # ValhallaLoot Configuration
 # Global settings for the ValhallaLoot plugin
 
+# DO NOT MODIFY THIS - automatically updated by plugin
+config-version: "1.0.0"
+
 # Debug level: controls verbosity of logging
 # Options: LOWEST (dev), LOW (debug), NORMAL (info), HIGH (warn), HIGHEST (user-only)
 debug-level: "NORMAL"
@@ -9,7 +12,8 @@ debug-level: "NORMAL"
 # When enabled, newly loaded chunks are scanned and any vanilla containers found are converted
 # This provides automatic, low-overhead conversion without manual commands
 # Runs asynchronously to avoid server strain
-# NOTE: Only converts in worlds that have already been converted via /valloot convert
+# IMPORTANT: This feature ONLY activates in worlds that have already been converted via /valloot convert
+# This prevents accidental conversion of fresh worlds while allowing automatic updates in existing worlds
 auto-convert-on-chunk-load: true
 
 # Which worlds should have auto-conversion enabled
