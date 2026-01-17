@@ -1,7 +1,6 @@
 package dev.waystone.vallhaloot.loot;
 
 import dev.waystone.vallhaloot.util.ItemStackBuilder;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;

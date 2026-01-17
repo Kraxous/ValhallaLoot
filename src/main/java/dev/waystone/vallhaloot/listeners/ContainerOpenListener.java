@@ -10,7 +10,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
@@ -86,8 +85,8 @@ public class ContainerOpenListener implements Listener {
         BlockState state = block.getState();
         if (state instanceof TileState tileState) {
             PersistentDataContainer pdc = tileState.getPersistentDataContainer();
-            Byte converted = pdc.get(plugin.getConvertedKey(), PersistentDataType.BYTE);
-            if (converted == null || converted != (byte)1) {
+            Integer converted = pdc.get(plugin.getConvertedKey(), PersistentDataType.INTEGER);
+            if (converted == null || converted != 1) {
                 return;
             }
             // Skip player-placed containers: identified by PDC tag set on placement
@@ -221,6 +220,7 @@ public class ContainerOpenListener implements Listener {
             // Create a virtual inventory per-player and show rolled items (client-sided)
             Player viewer = Bukkit.getPlayer(result.getContext().getPlayerUUID());
             if (viewer != null) {
+                @SuppressWarnings("deprecation")
                 Inventory virtual = Bukkit.createInventory(viewer, realInventory.getSize(), block.getType().name());
                 int nextSlot = 0;
                 for (org.bukkit.inventory.ItemStack item : result.getItems()) {
@@ -312,9 +312,14 @@ public class ContainerOpenListener implements Listener {
      * MUST only be called from async context.
      */
     private String detectStructureTableSlow(Block block) {
+        // Variables kept for future use
+        @SuppressWarnings("unused")
         String biome = block.getBiome().toString().toLowerCase();
+        @SuppressWarnings("unused")
         int x = block.getX();
+        @SuppressWarnings("unused")
         int y = block.getY();
+        @SuppressWarnings("unused")
         int z = block.getZ();
         
         // Check for Stronghold (always underground, specific blocks around it)

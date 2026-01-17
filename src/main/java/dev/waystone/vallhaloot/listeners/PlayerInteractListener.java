@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
  * Currently unused but kept for potential future enhancements.
  */
 public class PlayerInteractListener implements Listener {
+    @SuppressWarnings("unused")
     private final ValhallaLootPlugin plugin;
 
     public PlayerInteractListener(ValhallaLootPlugin plugin) {

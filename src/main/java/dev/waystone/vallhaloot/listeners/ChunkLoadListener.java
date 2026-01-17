@@ -34,7 +34,7 @@ public class ChunkLoadListener implements Listener {
     private final Map<String, Boolean> processedChunks = Collections.synchronizedMap(
         new LinkedHashMap<String, Boolean>(16, 0.75f, true) {
             @Override
-            protected boolean removeEldestEntry(Map.Entry eldest) {
+            protected boolean removeEldestEntry(Map.Entry<String, Boolean> eldest) {
                 return size() > 10000;
             }
         }
@@ -89,8 +89,8 @@ public class ChunkLoadListener implements Listener {
         // Mark as processed
         processedChunks.put(chunkKey, true);
 
-        // Run conversion asynchronously to avoid blocking
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+        // Run conversion on next tick to avoid blocking chunk load, but stay on main thread to avoid async access issues
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
             try {
                 processChunk(event.getChunk(), worldName);
             } catch (Exception e) {
@@ -145,8 +145,8 @@ public class ChunkLoadListener implements Listener {
             org.bukkit.block.TileState tileState = (org.bukkit.block.TileState) state;
             PersistentDataContainer pdc = tileState.getPersistentDataContainer();
 
-            // Skip if player-placed
-            if (pdc.has(playerPlacedKey, PersistentDataType.INTEGER)) {
+            // Skip if player-placed (stored as BYTE by ContainerPlacementListener)
+            if (pdc.has(playerPlacedKey, PersistentDataType.BYTE)) {
                 skipped.incrementAndGet();
                 continue;
             }
@@ -157,34 +157,32 @@ public class ChunkLoadListener implements Listener {
                 continue;
             }
 
-            // Convert this vanilla container on main thread
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                try {
-                    pdc.set(convertedKey, PersistentDataType.INTEGER, 1);
+            // Convert this vanilla container (already on main thread)
+            try {
+                pdc.set(convertedKey, PersistentDataType.INTEGER, 1);
 
-                    // Backup original inventory
-                    if (state instanceof Container) {
-                        Container container = (Container) state;
-                        String containerKey = getContainerKey(state.getLocation());
-                        String serialized = dev.waystone.vallhaloot.util.InventorySerializer.toBase64(
-                            container.getInventory().getContents()
-                        );
-                        storage.saveOriginalInventory(containerKey, serialized);
-                    }
-
-                    tileState.update(true, false);
-                    converted.incrementAndGet();
-                    backgroundConverted.incrementAndGet();
-
-                    int total = backgroundConverted.get();
-                    if (total % 50 == 0) {
-                        plugin.debug(DebugLevel.NORMAL, "Background conversion: %d containers converted so far", total);
-                    }
-                } catch (Exception e) {
-                    plugin.debug(DebugLevel.HIGH, "Error converting container at %s: %s", 
-                        state.getLocation(), e.getMessage());
+                // Backup original inventory
+                if (state instanceof Container) {
+                    Container container = (Container) state;
+                    String containerKey = getContainerKey(state.getLocation());
+                    String serialized = dev.waystone.vallhaloot.util.InventorySerializer.toBase64(
+                        container.getInventory().getContents()
+                    );
+                    storage.saveOriginalInventory(containerKey, serialized);
                 }
-            });
+
+                tileState.update(true, false);
+                converted.incrementAndGet();
+                backgroundConverted.incrementAndGet();
+
+                int total = backgroundConverted.get();
+                if (total % 50 == 0) {
+                    plugin.debug(DebugLevel.NORMAL, "Background conversion: %d containers converted so far", total);
+                }
+            } catch (Exception e) {
+                plugin.debug(DebugLevel.HIGH, "Error converting container at %s: %s", 
+                    state.getLocation(), e.getMessage());
+            }
         }
 
         int totalConverted = converted.get();

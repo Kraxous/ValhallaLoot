@@ -4,7 +4,6 @@ import dev.waystone.vallhaloot.ValhallaLootPlugin;
 import dev.waystone.vallhaloot.loot.*;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -29,6 +28,7 @@ public class ConfigManager {
      * This allows automatic config updates when the plugin is upgraded.
      */
     private void checkAndUpdateConfigVersion() {
+        @SuppressWarnings("deprecation")
         String pluginVersion = plugin.getDescription().getVersion();
         String configVersion = mainConfig.getString("config-version", "0.0.0");
         

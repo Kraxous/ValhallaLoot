@@ -45,7 +45,7 @@ public class ValhallaLootPlugin extends JavaPlugin {
         instance = this;
         
         // Set locale to en-GB (British English) for consistency
-        Locale.setDefault(new Locale("en", "GB"));
+        Locale.setDefault(Locale.of("en", "GB"));
         System.setProperty("user.language", "en");
         System.setProperty("user.country", "GB");
         

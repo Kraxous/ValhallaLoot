@@ -11,6 +11,7 @@ import java.util.Base64;
  * Utility to deserialize base64 serialized ItemStack strings from ValhallaTrinkets defaults.
  */
 public class ItemSerialization {
+    @SuppressWarnings("deprecation")
     public static ItemStack deserializeItemStack(String base64){
         if (base64 == null || base64.isEmpty()) return null;
         try {

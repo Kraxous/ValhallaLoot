@@ -10,7 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.block.TileState;
@@ -322,8 +321,11 @@ public class ConvertCommand implements CommandExecutor {
                 plugin.debug(DebugLevel.NORMAL, "Pre-loading chunks in %s (use with caution)", worldName);
             }
             
+            @SuppressWarnings("unused")
             int converted = 0;
+            @SuppressWarnings("unused")
             int skippedPlayerPlaced = 0;
+            @SuppressWarnings("unused")
             int skippedAlreadyConverted = 0;
             NamespacedKey convertedKey = plugin.getConvertedKey();
             NamespacedKey playerPlacedKey = plugin.getPlayerPlacedKey();
@@ -371,8 +373,8 @@ public class ConvertCommand implements CommandExecutor {
                             TileState tileState = (TileState) state;
                             PersistentDataContainer pdc = tileState.getPersistentDataContainer();
                             
-                            // Skip if player-placed
-                            if (pdc.has(playerPlacedKey, PersistentDataType.INTEGER)) {
+                            // Skip if player-placed (stored as BYTE by ContainerPlacementListener)
+                            if (pdc.has(playerPlacedKey, PersistentDataType.BYTE)) {
                                 skippedPlayerPlaced_ref[0]++;
                                 continue;
                             }

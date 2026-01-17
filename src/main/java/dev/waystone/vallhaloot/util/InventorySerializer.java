@@ -12,6 +12,7 @@ import java.util.Base64;
 public final class InventorySerializer {
     private InventorySerializer() {}
 
+    @SuppressWarnings("deprecation")
     public static String toBase64(ItemStack[] contents) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              BukkitObjectOutputStream oos = new BukkitObjectOutputStream(baos)) {
@@ -26,6 +27,7 @@ public final class InventorySerializer {
         }
     }
 
+    @SuppressWarnings("deprecation")
     public static ItemStack[] fromBase64(String base64) {
         byte[] data = Base64.getDecoder().decode(base64);
         try (ByteArrayInputStream bais = new ByteArrayInputStream(data);

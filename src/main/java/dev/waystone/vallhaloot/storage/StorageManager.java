@@ -1,10 +1,7 @@
 package dev.waystone.vallhaloot.storage;
 
 import dev.waystone.vallhaloot.ValhallaLootPlugin;
-import org.bukkit.util.Vector;
 import java.util.UUID;
-import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 
 import java.io.File;
 import java.sql.*;
@@ -26,14 +23,14 @@ public class StorageManager {
         this.plugin = plugin;
         this.openMarkers = java.util.Collections.synchronizedMap(
             new java.util.LinkedHashMap<String, Long>(16, 0.75f, true) {
-                protected boolean removeEldestEntry(java.util.Map.Entry eldest) {
+                protected boolean removeEldestEntry(java.util.Map.Entry<String, Long> eldest) {
                     return size() > 100000;
                 }
             }
         );
         this.playerOpenMarkers = java.util.Collections.synchronizedMap(
             new java.util.LinkedHashMap<String, ConcurrentHashMap<UUID, Long>>(16, 0.75f, true) {
-                protected boolean removeEldestEntry(java.util.Map.Entry eldest) {
+                protected boolean removeEldestEntry(java.util.Map.Entry<String, ConcurrentHashMap<UUID, Long>> eldest) {
                     return size() > 100000;
                 }
             }
@@ -304,6 +301,59 @@ public class StorageManager {
                 pstmt.executeUpdate();
             } catch (SQLException e) {
                 plugin.getLogger().warning("Failed to remove original inventory: " + e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Clear first-open markers for a specific world.
+     * Useful for resetting containers after a failed conversion.
+     */
+    public void clearFirstOpenMarkersForWorld(String worldName) {
+        // Clear in-memory cache
+        openMarkers.entrySet().removeIf(e -> e.getKey().startsWith(worldName + ":"));
+        playerOpenMarkers.entrySet().removeIf(e -> e.getKey().startsWith(worldName + ":"));
+
+        // Clear database
+        plugin.getSchedulerHelper().runAsync(() -> {
+            if (dbConnection == null) return;
+            try (PreparedStatement pstmt = dbConnection.prepareStatement(
+                    "DELETE FROM first_opens WHERE container_key LIKE ?")) {
+                pstmt.setString(1, worldName + ":%");
+                int deleted = pstmt.executeUpdate();
+                plugin.getLogger().info("Cleared " + deleted + " first-open markers for world: " + worldName);
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to clear first-open markers: " + e.getMessage());
+            }
+
+            try (PreparedStatement pstmt = dbConnection.prepareStatement(
+                    "DELETE FROM first_opens_by_player WHERE container_key LIKE ?")) {
+                pstmt.setString(1, worldName + ":%");
+                int deleted = pstmt.executeUpdate();
+                plugin.getLogger().info("Cleared " + deleted + " per-player first-open markers for world: " + worldName);
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to clear per-player first-open markers: " + e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Clear all first-open markers and respawn cooldowns.
+     * Use with caution - this resets all containers.
+     */
+    public void clearAllOpenMarkers() {
+        openMarkers.clear();
+        playerOpenMarkers.clear();
+
+        plugin.getSchedulerHelper().runAsync(() -> {
+            if (dbConnection == null) return;
+            try (Statement stmt = dbConnection.createStatement()) {
+                stmt.executeUpdate("DELETE FROM first_opens");
+                stmt.executeUpdate("DELETE FROM first_opens_by_player");
+                stmt.executeUpdate("DELETE FROM respawn_cooldowns");
+                plugin.getLogger().info("Cleared all first-open markers and respawn cooldowns");
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to clear all open markers: " + e.getMessage());
             }
         });
     }

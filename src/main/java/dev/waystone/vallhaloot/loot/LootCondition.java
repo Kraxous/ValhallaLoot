@@ -42,6 +42,7 @@ public interface LootCondition {
 
         public static LootCondition permission(String permission) {
             return ctx -> {
+                @SuppressWarnings("unused")
                 Object player = ctx.getMetadata("player_obj");
                 // This would need player object from context
                 // For now, stored as metadata by integration layer

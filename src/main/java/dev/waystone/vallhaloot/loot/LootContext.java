@@ -1,7 +1,5 @@
 package dev.waystone.vallhaloot.loot;
 
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.*;

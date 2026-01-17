@@ -23,6 +23,7 @@ public class ItemStackBuilder {
         this.meta = itemStack.getItemMeta();
     }
 
+    @SuppressWarnings("deprecation")
     public ItemStackBuilder withName(String displayName) {
         if (meta != null) {
             meta.setDisplayName(displayName);
@@ -30,6 +31,7 @@ public class ItemStackBuilder {
         return this;
     }
 
+    @SuppressWarnings("deprecation")
     public ItemStackBuilder withLore(String... loreLines) {
         if (meta != null) {
             List<String> lore = new ArrayList<>();
@@ -41,6 +43,7 @@ public class ItemStackBuilder {
         return this;
     }
 
+    @SuppressWarnings("deprecation")
     public ItemStackBuilder withLore(List<String> lore) {
         if (meta != null) {
             meta.setLore(lore);

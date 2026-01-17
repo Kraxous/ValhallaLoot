@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
  */
 public class LootCommand implements CommandExecutor {
     private final ValhallaLootPlugin plugin;
+    @SuppressWarnings("unused")
     private final StorageManager storage;
     private final ConvertCommand convertCommand;
     private final RestoreCommand restoreCommand;
@@ -46,6 +47,7 @@ public class LootCommand implements CommandExecutor {
             case "bg-status" -> handleBackgroundStatus(sender);
             case "convert" -> convertCommand.onCommand(sender, command, label, copyRemainingArgs(args));
             case "restore" -> restoreCommand.onCommand(sender, command, label, copyRemainingArgs(args));
+            case "reset" -> handleReset(sender, copyRemainingArgs(args));
             default -> sendUsage(sender);
         };
     }
@@ -92,6 +94,40 @@ public class LootCommand implements CommandExecutor {
         } else {
             sender.sendMessage("§7Background conversion is disabled.");
             sender.sendMessage("§7Enable in config: auto-convert-on-chunk-load: true");
+        }
+        
+        return true;
+    }
+
+    private boolean handleReset(CommandSender sender, String[] args) {
+        if (!sender.hasPermission("valloot.admin")) {
+            sender.sendMessage("§cYou don't have permission to use this command.");
+            return true;
+        }
+
+        if (args.length == 0) {
+            sender.sendMessage("§cUsage: /valloot reset <world_name|all> [confirm]");
+            return true;
+        }
+
+        String target = args[0].toLowerCase();
+        boolean confirmed = args.length > 1 && args[1].equals("confirm");
+
+        if (!confirmed) {
+            sender.sendMessage("§cThis will clear all first-open markers for " + target);
+            sender.sendMessage("§cPlayers will be able to loot these containers again.");
+            sender.sendMessage("§cConfirmation required. Run: /valloot reset " + target + " confirm");
+            return true;
+        }
+
+        sender.sendMessage("§eClearing first-open markers for " + target + "...");
+        
+        if (target.equals("all")) {
+            storage.clearAllOpenMarkers();
+            sender.sendMessage("§aCleared all first-open markers globally.");
+        } else {
+            storage.clearFirstOpenMarkersForWorld(target);
+            sender.sendMessage("§aCleared first-open markers for world: " + target);
         }
         
         return true;
@@ -178,6 +214,7 @@ public class LootCommand implements CommandExecutor {
         sender.sendMessage("§6/valloot bg-status §f- Check background conversion status");
         sender.sendMessage("§6/valloot test <table> [player] [--give] §f- Test a loot table");
         sender.sendMessage("§6/valloot convert <world|all> [--load-all-chunks] §f- Convert containers (manual)");
+        sender.sendMessage("§6/valloot reset <world|all> confirm §f- Clear first-open markers (reset loot)");
         sender.sendMessage("§6/valloot restore <world|all> confirm §f- Restore original inventories");
         return true;
     }

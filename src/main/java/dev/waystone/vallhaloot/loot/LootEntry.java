@@ -1,7 +1,6 @@
 package dev.waystone.vallhaloot.loot;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.*;
 
