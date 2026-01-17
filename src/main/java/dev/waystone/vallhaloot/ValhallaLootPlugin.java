@@ -13,6 +13,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.NamespacedKey;
 
+import java.util.Locale;
+
 /**
  * ValhallaLoot Plugin
  * 
@@ -41,6 +43,11 @@ public class ValhallaLootPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        
+        // Set locale to en-GB (British English) for consistency
+        Locale.setDefault(new Locale("en", "GB"));
+        System.setProperty("user.language", "en");
+        System.setProperty("user.country", "GB");
         
         // Initialize scheduler first
         this.schedulerHelper = new SchedulerHelper(this);

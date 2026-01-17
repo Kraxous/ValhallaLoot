@@ -1,0 +1,355 @@
+# Trial Chambers Loot Table
+# Matches Minecraft 1.21+ trial chambers loot with ValhallaMMO custom item integration
+
+name: trial_chambers
+
+# Only generate loot the first time a player opens this container
+first-open-only: true
+
+# Respawn cooldown (in milliseconds) - 2 hours
+respawn-cooldown-ms: 7200000
+respawn-variance: 20.0
+
+# Loot pools
+pools:
+  # Trial keys and trial-specific items
+  trial_exclusive:
+    rolls: 1
+    roll-bonus: 0.5
+    entries:
+      trial_key:
+        material: TRIAL_KEY
+        min-amount: 1
+        max-amount: 2
+        weight: 3.0
+        display-name: "§6Trial Key"
+        conditions: {}
+      
+      ominous_trial_key:
+        material: OMINOUS_TRIAL_KEY
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§5Ominous Trial Key"
+        conditions: {}
+
+  # Pottery shards and trial chamber decorative items
+  pottery:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      pottery_shard_archer:
+        material: POTTERY_SHARD_ARCHER
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        conditions: {}
+      
+      pottery_shard_prize:
+        material: POTTERY_SHARD_PRIZE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        conditions: {}
+      
+      pottery_shard_skull:
+        material: POTTERY_SHARD_SKULL
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}
+      
+      pottery_shard_arms_up:
+        material: POTTERY_SHARD_ARMS_UP
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}
+
+  # Diamonds and premium ores
+  premium_gems:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 2
+        max-amount: 6
+        weight: 4.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      emerald:
+        material: EMERALD
+        min-amount: 2
+        max-amount: 5
+        weight: 3.0
+        conditions: {}
+      
+      netherite_scrap:
+        material: NETHERITE_SCRAP
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        display-name: "§8Netherite Scrap"
+        conditions: {}
+
+  # Exceptional enchanted weapons (ValhallaMMO integration)
+  enchanted_weapons:
+    rolls: 1
+    roll-bonus: 0.3
+    entries:
+      enchanted_book_sharpness:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Sharpness V"
+        conditions: {}
+      
+      enchanted_book_power:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Power V"
+        conditions: {}
+      
+      diamond_spear:
+        material: DIAMOND_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§bDiamond Spear"
+        conditions: {}
+      
+      netherite_spear:
+        material: NETHERITE_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§8Netherite Spear"
+        conditions: {}
+      
+      diamond_sword:
+        material: DIAMOND_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§bDiamond Sword"
+        conditions: {}
+      
+      diamond_pickaxe:
+        material: DIAMOND_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§bDiamond Pickaxe"
+        conditions: {}
+
+  # Exceptional enchanted armour
+  enchanted_armour:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      enchanted_book_protection:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Protection IV"
+        conditions: {}
+      
+      diamond_helmet:
+        material: DIAMOND_HELMET
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§bDiamond Helmet"
+        conditions: {}
+      
+      diamond_chestplate:
+        material: DIAMOND_CHESTPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§bDiamond Chestplate"
+        conditions: {}
+
+  # Netherite and premium items
+  netherite:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      netherite_upgrade_smithing_template:
+        material: NETHERITE_UPGRADE_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Netherite Upgrade Template"
+        conditions: {}
+      
+      ancient_debris:
+        material: ANCIENT_DEBRIS
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        display-name: "§cAncient Debris"
+        conditions: {}
+
+  # Ingots and valuables
+  ingots:
+    rolls: 2
+    roll-bonus: 0.4
+    entries:
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 3
+        max-amount: 10
+        weight: 4.0
+        conditions: {}
+      
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 4
+        max-amount: 12
+        weight: 3.0
+        conditions: {}
+      
+      copper_ingot:
+        material: COPPER_INGOT
+        min-amount: 3
+        max-amount: 8
+        weight: 2.0
+        conditions: {}
+
+  # Utility items
+  utility:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      book:
+        material: BOOK
+        min-amount: 2
+        max-amount: 4
+        weight: 3.0
+        conditions: {}
+      
+      name_tag:
+        material: NAME_TAG
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        conditions: {}
+      
+      saddle:
+        material: SADDLE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}
+
+  # Arrows and ranged items
+  ranged:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      arrow:
+        material: ARROW
+        min-amount: 4
+        max-amount: 16
+        weight: 4.0
+        conditions: {}
+      
+      crossbow:
+        material: CROSSBOW
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        conditions: {}
+
+  # Rare trial chamber exclusive block drops
+  rare_blocks:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      copper_block:
+        material: COPPER_BLOCK
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions: {}
+
+  # Trial chamber exclusive armor trim templates (VERY RARE - 6.3% to 22.5% in vanilla)
+  trial_chamber_trims:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      flow_trim:
+        material: FLOW_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§bFlow Armor Trim (Breeze Rod)"
+        conditions: {}
+      
+      bolt_trim:
+        material: BOLT_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§6Bolt Armor Trim (Copper Block)"
+        conditions: {}
+      
+      wayfinder_trim:
+        material: WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§2Wayfinder Armor Trim"
+        conditions: {}
+      
+      raiser_trim:
+        material: RAISER_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§2Raiser Armor Trim"
+        conditions: {}
+      
+      shaper_trim:
+        material: SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§2Shaper Armor Trim"
+        conditions: {}
+      
+      host_trim:
+        material: HOST_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§2Host Armor Trim"
+        conditions: {}
+        conditions: {}
+      
+      exposed_copper:
+        material: EXPOSED_COPPER
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        conditions: {}
+      
+      weathered_copper:
+        material: WEATHERED_COPPER
+        min-amount: 1
+        max-amount: 2
+        weight: 1.0
+        conditions: {}

@@ -37,3 +37,21 @@ tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.release.set(21)
 }
+
+// Set default locale to en-GB (British English)
+tasks.register("setLocale") {
+    doFirst {
+        System.setProperty("user.language", "en")
+        System.setProperty("user.country", "GB")
+    }
+}
+
+// Apply locale to all JVM tasks
+allprojects {
+    tasks.withType<JavaCompile> {
+        doFirst {
+            System.setProperty("user.language", "en")
+            System.setProperty("user.country", "GB")
+        }
+    }
+}

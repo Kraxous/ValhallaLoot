@@ -1,5 +1,5 @@
 # Rare Loot Table
-# This table is used for trapped chests and other high-value containers
+# Matches vanilla Minecraft loot from strongholds, end cities, and nether fortresses
 
 name: rare
 
@@ -12,67 +12,446 @@ respawn-variance: 15.0
 
 # Loot pools
 pools:
-  # Rare gems and ores
-  gems:
+  # Enchanted books (highest priority in strongholds)
+  enchantments:
     rolls: 2
     roll-bonus: 0.5
-    entries:
-      diamond:
-        material: DIAMOND
-        min-amount: 1
-        max-amount: 3
-        weight: 2.0
-        display-name: "§b✦ Diamond ✦"
-        lore:
-          - "§7A precious gem"
-        conditions: {}
-      
-      amethyst_shard:
-        material: AMETHYST_SHARD
-        min-amount: 2
-        max-amount: 8
-        weight: 1.5
-        display-name: "§5Amethyst Shard"
-        conditions: {}
-      
-      lapis_lazuli:
-        material: LAPIS_LAZULI
-        min-amount: 4
-        max-amount: 12
-        weight: 2.0
-        conditions: {}
-
-  # Enchanted books pool
-  enchantments:
-    rolls: 1
-    roll-bonus: 0.0
     entries:
       enchanted_book_protection:
         material: ENCHANTED_BOOK
         min-amount: 1
         max-amount: 1
-        weight: 1.0
+        weight: 4.0
         display-name: "§dEnchanted Book"
         lore:
-          - "§7Contains an enchantment"
+          - "§7Protection IV"
+        conditions: {}
+      
+      enchanted_book_efficiency:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Efficiency IV"
+        conditions: {}
+      
+      enchanted_book_sharpness:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Sharpness IV"
+        conditions: {}
+      
+      enchanted_book_power:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Power IV"
+        conditions: {}
+      
+      enchanted_book_fortune:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Fortune III"
+        conditions: {}
+      
+      enchanted_book_silk_touch:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Silk Touch"
+        conditions: {}
+      
+      enchanted_book_punch:
+        material: ENCHANTED_BOOK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§dEnchanted Book"
+        lore:
+          - "§7Punch II"
         conditions: {}
 
-  # Valuables pool
-  treasure:
+  # Gems and precious materials
+  gems:
+    rolls: 2
+    roll-bonus: 0.3
+    entries:
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 5
+        weight: 4.0
+        display-name: "§b✦ Diamond ✦"
+        conditions: {}
+      
+      emerald:
+        material: EMERALD
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        conditions: {}
+      
+      lapis_lazuli:
+        material: LAPIS_LAZULI
+        min-amount: 4
+        max-amount: 16
+        weight: 3.0
+        conditions: {}
+      
+      amethyst_shard:
+        material: AMETHYST_SHARD
+        min-amount: 4
+        max-amount: 12
+        weight: 2.0
+        conditions: {}
+
+  # Gold and ingots (nether fortress loot)
+  ingots:
     rolls: 1
-    roll-bonus: 0.0
+    roll-bonus: 0.2
     entries:
       gold_ingot:
         material: GOLD_INGOT
         min-amount: 2
-        max-amount: 5
-        weight: 2.0
+        max-amount: 8
+        weight: 5.0
         conditions: {}
       
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 8
+        weight: 4.0
+        conditions: {}
+      
+      copper_ingot:
+        material: COPPER_INGOT
+        min-amount: 2
+        max-amount: 6
+        weight: 2.0
+        conditions: {}
+
+  # Netherite and ancient items
+  netherite:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
       netherite_scrap:
         material: NETHERITE_SCRAP
         min-amount: 1
         max-amount: 2
-        weight: 0.5
+        weight: 2.0
         display-name: "§8Netherite Scrap"
         conditions: {}
+      
+      ancient_debris:
+        material: ANCIENT_DEBRIS
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§cAncient Debris"
+        conditions: {}
+
+  # Exceptional tools and weapons
+  tools:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      iron_spear:
+        material: IRON_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§7Iron Spear"
+        conditions: {}
+      
+      diamond_spear:
+        material: DIAMOND_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.8
+        display-name: "§bDiamond Spear"
+        conditions: {}
+      
+      netherite_spear:
+        material: NETHERITE_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 0.9
+        display-name: "§8Netherite Spear"
+        conditions: {}
+      
+      diamond_pickaxe:
+        material: DIAMOND_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§bDiamond Pickaxe"
+        conditions: {}
+      
+      diamond_sword:
+        material: DIAMOND_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§bDiamond Sword"
+        conditions: {}
+      
+      iron_sword:
+        material: IRON_SWORD
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+
+  # Rare armor
+  armor:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      diamond_helmet:
+        material: DIAMOND_HELMET
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§bDiamond Helmet"
+        conditions: {}
+      
+      diamond_chestplate:
+        material: DIAMOND_CHESTPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.2
+        display-name: "§bDiamond Chestplate"
+        conditions: {}
+      
+      iron_chestplate:
+        material: IRON_CHESTPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      iron_leggings:
+        material: IRON_LEGGINGS
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+
+  # Nether items
+  nether:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      blaze_rod:
+        material: BLAZE_ROD
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        conditions: {}
+      
+      nether_wart:
+        material: NETHER_WART
+        min-amount: 3
+        max-amount: 12
+        weight: 2.0
+        conditions: {}
+      
+      warped_fungus:
+        material: WARPED_FUNGUS
+        min-amount: 2
+        max-amount: 6
+        weight: 2.0
+        conditions: {}
+      
+      crimson_fungus:
+        material: CRIMSON_FUNGUS
+        min-amount: 2
+        max-amount: 6
+        weight: 2.0
+        conditions: {}
+
+  # Exotic and end city items
+  exotic:
+    rolls: 1
+    roll-bonus: 0.05
+    entries:
+      ender_pearl:
+        material: ENDER_PEARL
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        conditions: {}
+      
+      ghast_tear:
+        material: GHAST_TEAR
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        display-name: "§dGhast Tear"
+        conditions: {}
+      
+      shulker_shell:
+        material: SHULKER_SHELL
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        conditions: {}
+      
+      heart_of_the_sea:
+        material: HEART_OF_THE_SEA
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§bHeart of the Sea"
+        conditions: {}
+      
+      dragon_breath:
+        material: DRAGON_BREATH
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§5Dragon Breath"
+        conditions: {}
+
+  # Books and knowledge
+  books:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      book:
+        material: BOOK
+        min-amount: 1
+        max-amount: 3
+        weight: 4.0
+        conditions: {}
+      
+      name_tag:
+        material: NAME_TAG
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        conditions: {}
+      
+      compass:
+        material: COMPASS
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        conditions: {}
+
+  # Rare armor trim templates (exceptionally rare - 1% to 10% in vanilla)
+  armor_trims_rare:
+    rolls: 1
+    roll-bonus: 0.12
+    entries:
+      eye_trim:
+        material: EYE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§dEye Armor Trim"
+        conditions: {}
+      
+      spire_trim:
+        material: SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§eSpire Armor Trim"
+        conditions: {}
+      
+      rib_trim:
+        material: RIB_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§6Rib Armor Trim"
+        conditions: {}
+      
+      snout_trim:
+        material: SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.2
+        display-name: "§fSnout Armor Trim"
+        conditions: {}
+      
+      vex_trim:
+        material: VEX_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§5Vex Armor Trim"
+        conditions: {}
+      
+      tide_trim:
+        material: TIDE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§3Tide Armor Trim"
+        conditions: {}
+      
+      ward_trim:
+        material: WARD_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§cWard Armor Trim"
+        conditions: {}
+      
+      silence_trim:
+        material: SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.3
+        display-name: "§4Silence Armor Trim (Ultra Rare)"
+        conditions: {}
+        conditions: {}
+
+  # Night-only exceptional items
+  night_rare:
+    rolls: 1
+    roll-bonus: 0.0
+    entries:
+      phantom_membrane:
+        material: PHANTOM_MEMBRANE
+        min-amount: 1
+        max-amount: 3
+        weight: 2.0
+        conditions:
+          time: "night-only"
+      
+      dark_oak_log:
+        material: DARK_OAK_LOG
+        min-amount: 1
+        max-amount: 3
+        weight: 1.0
+        conditions:
+          time: "night-only"
+

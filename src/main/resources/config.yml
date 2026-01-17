@@ -42,6 +42,8 @@ table-selection:
   chest: "common"
   barrel: "common"
   trapped_chest: "rare"
+  trial_spawner: "trial_chambers"
+  vault: "trial_chambers"
   # Add more mappings as needed
 
 # ValhallaMMO Integration

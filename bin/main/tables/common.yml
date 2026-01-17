@@ -1,5 +1,5 @@
 # Common Loot Table
-# This table is used for standard containers like chests and barrels
+# Matches vanilla Minecraft loot from village chests, shipwrecks, and basic dungeon chests
 
 name: common
 
@@ -12,75 +12,316 @@ respawn-variance: 10.0
 
 # Loot pools - each pool is rolled independently
 pools:
-  # Basic items pool
-  basic:
-    rolls: 2
-    roll-bonus: 0.0
+  # Food items (high frequency)
+  food:
+    rolls: 3
+    roll-bonus: 1.0
     entries:
-      stone:
-        material: STONE
-        min-amount: 2
-        max-amount: 8
-        weight: 10.0
-        conditions: {}
-      
-      dirt:
-        material: DIRT
+      wheat:
+        material: WHEAT
         min-amount: 1
         max-amount: 4
         weight: 8.0
         conditions: {}
       
-      coal:
-        material: COAL
+      carrots:
+        material: CARROT
+        min-amount: 1
+        max-amount: 4
+        weight: 8.0
+        conditions: {}
+      
+      potato:
+        material: POTATO
+        min-amount: 1
+        max-amount: 4
+        weight: 8.0
+        conditions: {}
+      
+      bread:
+        material: BREAD
+        min-amount: 1
+        max-amount: 3
+        weight: 6.0
+        conditions: {}
+      
+      apple:
+        material: APPLE
+        min-amount: 1
+        max-amount: 2
+        weight: 4.0
+        conditions: {}
+
+  # Basic materials
+  materials:
+    rolls: 2
+    roll-bonus: 0.5
+    entries:
+      stick:
+        material: STICK
+        min-amount: 1
+        max-amount: 8
+        weight: 8.0
+        conditions: {}
+      
+      oak_log:
+        material: OAK_LOG
+        min-amount: 1
+        max-amount: 3
+        weight: 6.0
+        conditions: {}
+      
+      birch_log:
+        material: BIRCH_LOG
+        min-amount: 1
+        max-amount: 3
+        weight: 5.0
+        conditions: {}
+      
+      string:
+        material: STRING
+        min-amount: 1
+        max-amount: 4
+        weight: 4.0
+        conditions: {}
+      
+      cobweb:
+        material: COBWEB
+        min-amount: 1
+        max-amount: 3
+        weight: 3.0
+        conditions: {}
+      
+      book:
+        material: BOOK
         min-amount: 1
         max-amount: 3
         weight: 5.0
         conditions: {}
 
-  # Valuable items pool
+  # Spears (new in 1.21)
+  spears:
+    rolls: 0
+    roll-bonus: 0.05
+    entries:
+      stone_spear:
+        material: STONE_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§7Stone Spear"
+        conditions: {}
+      
+      copper_spear:
+        material: COPPER_SPEAR
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§8Copper Spear"
+        conditions: {}
+
+  # Armor trim templates (new in 1.20)
+  armor_trims:
+    rolls: 0
+    roll-bonus: 0.08
+    entries:
+      coast_trim:
+        material: COAST_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 2
+        weight: 1.5
+        display-name: "§bCoast Armor Trim"
+        conditions: {}
+      
+      dune_trim:
+        material: DUNE_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 2
+        weight: 1.2
+        display-name: "§eGolden Dune Trim"
+        conditions: {}
+      
+      sentry_trim:
+        material: SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§6Sentry Trim"
+        conditions: {}
+      
+      wild_trim:
+        material: WILD_ARMOR_TRIM_SMITHING_TEMPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 0.5
+        display-name: "§2Wild Armor Trim"
+        conditions: {}
+
+  # Basic tools and equipment
+  equipment:
+    rolls: 1
+    roll-bonus: 0.5
+    entries:
+      wooden_pickaxe:
+        material: WOODEN_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 6.0
+        conditions: {}
+      
+      wooden_axe:
+        material: WOODEN_AXE
+        min-amount: 1
+        max-amount: 1
+        weight: 5.0
+        conditions: {}
+      
+      iron_pickaxe:
+        material: IRON_PICKAXE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      leather_helmet:
+        material: LEATHER_HELMET
+        min-amount: 1
+        max-amount: 1
+        weight: 4.0
+        conditions: {}
+      
+      leather_chestplate:
+        material: LEATHER_CHESTPLATE
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        conditions: {}
+      
+      saddle:
+        material: SADDLE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+
+  # Valuable items
   valuables:
     rolls: 1
-    roll-bonus: 0.0
+    roll-bonus: 0.3
     entries:
-      iron_ore:
-        material: IRON_ORE
+      emerald:
+        material: EMERALD
+        min-amount: 1
+        max-amount: 3
+        weight: 4.0
+        conditions: {}
+      
+      iron_ingot:
+        material: IRON_INGOT
+        min-amount: 1
+        max-amount: 4
+        weight: 3.0
+        conditions: {}
+      
+      gold_ingot:
+        material: GOLD_INGOT
+        min-amount: 1
+        max-amount: 2
+        weight: 2.0
+        conditions: {}
+      
+      name_tag:
+        material: NAME_TAG
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      diamond:
+        material: DIAMOND
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        conditions: {}
+
+  # Ores and raw materials
+  ores:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      coal:
+        material: COAL
+        min-amount: 1
+        max-amount: 4
+        weight: 8.0
+        conditions: {}
+      
+      raw_iron:
+        material: RAW_IRON
+        min-amount: 1
+        max-amount: 3
+        weight: 4.0
+        conditions: {}
+      
+      raw_copper:
+        material: RAW_COPPER
+        min-amount: 1
+        max-amount: 3
+        weight: 3.0
+        conditions: {}
+      
+      lapis_lazuli:
+        material: LAPIS_LAZULI
+        min-amount: 1
+        max-amount: 6
+        weight: 3.0
+        conditions: {}
+      
+      redstone:
+        material: REDSTONE
+        min-amount: 1
+        max-amount: 4
+        weight: 2.0
+        conditions: {}
+
+  # Miscellaneous
+  misc:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      paper:
+        material: PAPER
+        min-amount: 1
+        max-amount: 4
+        weight: 5.0
+        conditions: {}
+      
+      ink_sac:
+        material: INK_SAC
+        min-amount: 1
+        max-amount: 4
+        weight: 4.0
+        conditions: {}
+      
+      compass:
+        material: COMPASS
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      clock:
+        material: CLOCK
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        conditions: {}
+      
+      glass_bottle:
+        material: GLASS_BOTTLE
         min-amount: 1
         max-amount: 2
         weight: 3.0
         conditions: {}
-      
-      copper_ore:
-        material: COPPER_ORE
-        min-amount: 1
-        max-amount: 3
-        weight: 2.0
-        conditions: {}
-      
-      emerald:
-        material: EMERALD
-        min-amount: 1
-        max-amount: 1
-        weight: 1.0
-        conditions: {}
 
-  # Night-only items pool
-  night:
-    rolls: 1
-    roll-bonus: 0.0
-    entries:
-      glowstone:
-        material: GLOWSTONE
-        min-amount: 1
-        max-amount: 2
-        weight: 2.0
-        conditions:
-          time: "night-only"
-      
-      dark_oak_log:
-        material: DARK_OAK_LOG
-        min-amount: 2
-        max-amount: 4
-        weight: 1.0
-        conditions:
-          time: "night-only"
+
