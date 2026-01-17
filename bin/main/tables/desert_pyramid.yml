@@ -107,16 +107,19 @@ pools:
           - enchantments:
               efficiency: 4
 
-  # Desert specific items
-  desert_items:
+  # Enchanted golden apple (uncommon in desert)
+  special_treasures:
     rolls: 1
-    roll-bonus: 0.2
+    roll-bonus: 0.1
     entries:
-      tnt:
-        material: TNT
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
         min-amount: 1
-        max-amount: 2
-        weight: 2.0
+        max-amount: 1
+        weight: 2.5
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+
         display-name: "TNT (from traps)"
         conditions: {}
       

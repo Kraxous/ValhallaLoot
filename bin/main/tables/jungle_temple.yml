@@ -116,14 +116,19 @@ pools:
         display-name: "Trap Dispenser"
         conditions: {}
 
-  # Rare finds
-  rare_items:
+  # Enchanted golden apple (uncommon in jungle)
+  special_treasures:
     rolls: 1
     roll-bonus: 0.1
     entries:
-      golden_apple:
-        material: GOLDEN_APPLE
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
         min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+
         max-amount: 1
         weight: 1.5
         display-name: "§6Golden Apple"

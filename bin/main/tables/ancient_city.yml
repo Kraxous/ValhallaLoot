@@ -164,3 +164,44 @@ pools:
         lore:
           - "§7Unique artifact"
         conditions: {}
+  # Enchanted golden apple (ultra-rare, deepest treasure)
+  enchanted_items:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 4.0
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+
+  # Music discs from mineshaft and otherside
+  music_discs:
+    rolls: 1
+    roll-bonus: 0.08
+    entries:
+      music_disc_cat:
+        material: MUSIC_DISC_CAT
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§b🎵 Music Disc - Cat"
+        conditions: {}
+
+      music_disc_13:
+        material: MUSIC_DISC_13
+        min-amount: 1
+        max-amount: 1
+        weight: 1.5
+        display-name: "§b🎵 Music Disc - 13"
+        conditions: {}
+
+      music_disc_otherside:
+        material: MUSIC_DISC_OTHERSIDE
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§5🎵 Music Disc - Otherside"
+        conditions: {}

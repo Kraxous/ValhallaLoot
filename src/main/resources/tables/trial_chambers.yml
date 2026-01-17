@@ -298,6 +298,19 @@ pools:
           - "§7A simple charm"
         conditions: {}
 
+  # Enchanted golden apple (uncommon in trial chambers)
+  special_treasures:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+
       trinket_rare_ring:
         material: GOLD_NUGGET
         min-amount: 1

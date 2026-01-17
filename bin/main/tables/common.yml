@@ -324,4 +324,36 @@ pools:
         weight: 3.0
         conditions: {}
 
+  # Enchanted golden apples and music discs
+  enchanted_items:
+    rolls: 1
+    roll-bonus: 0.05
+    entries:
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 3.0
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
 
+  # Music discs from mineshaft
+  music_discs:
+    rolls: 1
+    roll-bonus: 0.02
+    entries:
+      music_disc_cat:
+        material: MUSIC_DISC_CAT
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§b🎵 Music Disc - Cat"
+        conditions: {}
+
+      music_disc_13:
+        material: MUSIC_DISC_13
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§b🎵 Music Disc - 13"
+        conditions: {}

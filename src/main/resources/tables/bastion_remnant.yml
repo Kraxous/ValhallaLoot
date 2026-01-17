@@ -113,3 +113,28 @@ pools:
         max-amount: 1
         weight: 1.0
         conditions: {}
+  # Enchanted golden apple (uncommon in bastion)
+  special_treasures:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.5
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+
+  # Pigstep music disc
+  music_discs:
+    rolls: 1
+    roll-bonus: 0.05
+    entries:
+      music_disc_pigstep:
+        material: MUSIC_DISC_PIGSTEP
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§d🎵 Music Disc - Pigstep"
+        conditions: {}

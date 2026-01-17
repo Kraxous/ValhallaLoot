@@ -87,6 +87,19 @@ pools:
           - "§7Punch II"
         conditions: {}
 
+  # Enchanted golden apple (rare version)
+  special_food:
+    rolls: 1
+    roll-bonus: 0.08
+    entries:
+      enchanted_golden_apple:
+        material: ENCHANTED_GOLDEN_APPLE
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6✨ Enchanted Golden Apple"
+        conditions: {}
+
   # Gems and precious materials
   gems:
     rolls: 2
