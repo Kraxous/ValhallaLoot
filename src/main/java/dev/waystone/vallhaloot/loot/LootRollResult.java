@@ -25,6 +25,20 @@ public class LootRollResult {
     public long getRollTimeMs() { return rollTimeMs; }
     public LootContext getContext() { return context; }
 
+    /**
+     * Adds a single item to the loot result. Intended for modifiers/integrations.
+     */
+    public void addItem(ItemStack item) {
+        if (item != null) items.add(item);
+    }
+
+    /**
+     * Adds multiple items to the loot result. Intended for modifiers/integrations.
+     */
+    public void addItems(Collection<ItemStack> toAdd) {
+        if (toAdd != null && !toAdd.isEmpty()) items.addAll(toAdd);
+    }
+
     @Override
     public String toString() {
         return "LootRollResult{" + tableName + ", " + items.size() + " items, " + rollTimeMs + "ms}";

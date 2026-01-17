@@ -1,6 +1,5 @@
 package dev.waystone.vallhaloot.util;
 
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -44,9 +43,5 @@ public final class InventorySerializer {
         } catch (IOException e) {
             throw new RuntimeException("Failed to deserialize inventory", e);
         }
-    }
-
-    public static String serializeInventory(Inventory inv) {
-        return toBase64(inv.getContents());
     }
 }

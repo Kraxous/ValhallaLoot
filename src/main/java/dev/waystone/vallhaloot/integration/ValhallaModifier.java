@@ -7,6 +7,8 @@ import dev.waystone.vallhaloot.loot.LootRollResult;
 import dev.waystone.vallhaloot.util.DebugLevel;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.inventory.ItemStack;
+import java.util.Locale;
 
 /**
  * ValhallaMMO loot modifier.
@@ -51,17 +53,50 @@ public class ValhallaModifier implements LootModifier {
         if (player == null || context == null) {
             return;
         }
+        // Soft-call ValhallaTrinkets default trinkets and ValhallaMMO custom items instead of duplicating tables
+        try {
+            // Add a trinket based on table type if ValhallaTrinkets is present
+            addTrinketIfAvailable(result);
+            // Future: add ValhallaMMO custom items similarly (soft dependency via reflection)
+        } catch (Exception e) {
+            plugin.debug(DebugLevel.LOW, "VALHALLA MODIFIER: Integration failed %s", e.getMessage());
+        }
+    }
 
-        // TODO: Implement actual ValhallaMMO integration
-        // This is scaffolding for future implementation
-        
-        // Example modifications:
-        // 1. Apply luck multiplier based on player's Luck stat
-        // 2. Add bonus loot rolls based on Loot Finding or Greed skills
-        // 3. Modify item rarities based on perks
-        // 4. Apply reroll chances based on enchantment levels
-        
-        plugin.debug(DebugLevel.LOW, "VALHALLA MODIFIER: Would apply modifications for %s to loot table %s", 
-            player.getName(), result.getTableName());
+    private void addTrinketIfAvailable(LootRollResult result) {
+        Plugin trinkets = plugin.getServer().getPluginManager().getPlugin("ValhallaTrinkets");
+        if (trinkets == null || !trinkets.isEnabled()) return;
+
+        String table = result.getTableName();
+        if (table == null) return;
+
+        // Simple per-table chance, avoids recreating loot tables locally
+        double chance;
+        switch (table.toLowerCase(Locale.ROOT)) {
+            case "trial_chambers":
+                chance = 0.15; // 15%
+                break;
+            case "end_city":
+                chance = 0.10; // 10%
+                break;
+            case "ancient_city":
+                chance = 0.08; // 8%
+                break;
+            case "pillager_outpost":
+                chance = 0.12; // 12%
+                break;
+            default:
+                chance = 0.0; // not applicable
+        }
+
+        if (chance <= 0.0) return;
+
+        if (Math.random() < chance) {
+            ItemStack trinket = ValhallaTrinketsBridge.randomDefaultTrinket(plugin);
+            if (trinket != null) {
+                result.addItem(trinket);
+                plugin.debug(DebugLevel.LOW, "VALHALLA MODIFIER: Added default trinket to %s", table);
+            }
+        }
     }
 }

@@ -114,3 +114,28 @@ pools:
         conditions:
           - enchantments:
               sharpness: 4
+
+  # Valhalla trinkets (Pillager Outpost - uncommon)
+  valhalla_trinkets:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      trinket_military_charm:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 1.2
+        display-name: "§6Trinket: Military Charm"
+        lore:
+          - "§7Favored by raiders"
+        conditions: {}
+
+      trinket_scout_ring:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§dTrinket: Scout Ring"
+        lore:
+          - "§7Light-footed"
+        conditions: {}

@@ -119,3 +119,38 @@ pools:
         max-amount: 3
         weight: 1.5
         conditions: {}
+
+  # Valhalla trinkets (End City - rare)
+  valhalla_trinkets:
+    rolls: 1
+    roll-bonus: 0.15
+    entries:
+      trinket_end_charm:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 0.8
+        display-name: "§6Trinket: End Charm"
+        lore:
+          - "§7Echoes of the End"
+        conditions: {}
+
+      trinket_end_ring:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 0.5
+        display-name: "§dTrinket: End Ring"
+        lore:
+          - "§7Gift of the City"
+        conditions: {}
+
+      trinket_end_relic:
+        material: NETHER_STAR
+        min-amount: 1
+        max-amount: 1
+        weight: 0.25
+        display-name: "§5Trinket: End Relic"
+        lore:
+          - "§7Unique end artifact"
+        conditions: {}

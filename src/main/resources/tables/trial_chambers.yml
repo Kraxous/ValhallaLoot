@@ -268,7 +268,6 @@ pools:
         weight: 0.8
         display-name: "§2Host Armor Trim"
         conditions: {}
-        conditions: {}
       
       exposed_copper:
         material: EXPOSED_COPPER
@@ -282,4 +281,49 @@ pools:
         min-amount: 1
         max-amount: 2
         weight: 1.0
+        conditions: {}
+
+  # Valhalla trinkets (explicit probabilities)
+  valhalla_trinkets:
+    rolls: 1
+    roll-bonus: 0.2
+    entries:
+      trinket_common_charm:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 2.0
+        display-name: "§6Trinket: Charm"
+        lore:
+          - "§7A simple charm"
+        conditions: {}
+
+      trinket_rare_ring:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 1.0
+        display-name: "§dTrinket: Ring"
+        lore:
+          - "§7A rare ring"
+        conditions: {}
+
+      trinket_epic_pendant:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 0.5
+        display-name: "§5Trinket: Pendant"
+        lore:
+          - "§7An epic pendant"
+        conditions: {}
+
+      trinket_unique_relic:
+        material: NETHER_STAR
+        min-amount: 1
+        max-amount: 1
+        weight: 0.2
+        display-name: "§5Trinket: Relic"
+        lore:
+          - "§7A unique trinket"
         conditions: {}

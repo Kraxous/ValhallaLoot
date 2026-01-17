@@ -2,12 +2,14 @@
 build/
 out/
 target/
+bin/
 *.jar
 *.war
 
 # Gradle
 .gradle/
 gradle-wrapper.jar
+gradle.properties
 
 # IDE
 .idea/
@@ -25,6 +27,7 @@ Thumbs.db
 
 # Logs
 *.log
+build_output.txt
 
 # Database
 *.db

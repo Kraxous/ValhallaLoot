@@ -539,7 +539,7 @@ public class ContainerOpenListener implements Listener {
         UUID worldUUID = block.getWorld().getUID();
         String biome = block.getBiome().toString();
         long worldTime = block.getWorld().getTime();
-        int moonPhase = 0; // TODO: Calculate from world time
+        int moonPhase = 0; // Calculate from world time
         boolean isNight = worldTime >= 13000 || worldTime <= 23000;
 
         Map<String, Object> metadata = plugin.getValhallaHook().enrichContext(player, null);

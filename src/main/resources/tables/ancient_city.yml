@@ -129,3 +129,38 @@ pools:
         weight: 1.0
         display-name: "§bDiamond Sword"
         conditions: {}
+
+  # Valhalla trinkets (Ancient City - very rare)
+  valhalla_trinkets:
+    rolls: 1
+    roll-bonus: 0.1
+    entries:
+      trinket_ancient_charm:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 0.6
+        display-name: "§6Trinket: Ancient Charm"
+        lore:
+          - "§7Deep city relic"
+        conditions: {}
+
+      trinket_ancient_ring:
+        material: GOLD_NUGGET
+        min-amount: 1
+        max-amount: 1
+        weight: 0.4
+        display-name: "§dTrinket: Ancient Ring"
+        lore:
+          - "§7Rare deep treasure"
+        conditions: {}
+
+      trinket_ancient_relic:
+        material: NETHER_STAR
+        min-amount: 1
+        max-amount: 1
+        weight: 0.2
+        display-name: "§5Trinket: Ancient Relic"
+        lore:
+          - "§7Unique artifact"
+        conditions: {}

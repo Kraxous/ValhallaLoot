@@ -23,6 +23,9 @@ dependencies {
     // SQLite for persistent data (fallback storage)
     implementation("org.xerial:sqlite-jdbc:3.45.0.0")
     
+    // Gson for parsing ValhallaTrinkets default JSONs
+    implementation("com.google.code.gson:gson:2.10.1")
+    
     // Optional: for better YAML parsing if needed (Paper uses SnakeYAML built-in)
     // Already included in Paper API
 }
@@ -38,20 +41,3 @@ tasks.withType<JavaCompile> {
     options.release.set(21)
 }
 
-// Set default locale to en-GB (British English)
-tasks.register("setLocale") {
-    doFirst {
-        System.setProperty("user.language", "en")
-        System.setProperty("user.country", "GB")
-    }
-}
-
-// Apply locale to all JVM tasks
-allprojects {
-    tasks.withType<JavaCompile> {
-        doFirst {
-            System.setProperty("user.language", "en")
-            System.setProperty("user.country", "GB")
-        }
-    }
-}
