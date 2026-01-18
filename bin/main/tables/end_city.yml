@@ -23,8 +23,8 @@ pools:
 
   # Diamonds - end rewards
   diamonds:
-    rolls: 2
-    roll-bonus: 0.3
+    rolls: 1
+    roll-bonus: 0.2
     entries:
       diamond:
         material: DIAMOND

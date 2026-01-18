@@ -14,8 +14,8 @@ respawn-variance: 10.0
 pools:
   # Food items (high frequency)
   food:
-    rolls: 3
-    roll-bonus: 1.0
+    rolls: 1
+    roll-bonus: 0.5
     entries:
       wheat:
         material: WHEAT
@@ -54,8 +54,8 @@ pools:
 
   # Basic materials
   materials:
-    rolls: 2
-    roll-bonus: 0.5
+    rolls: 1
+    roll-bonus: 0.3
     entries:
       stick:
         material: STICK
@@ -160,7 +160,7 @@ pools:
   # Basic tools and equipment
   equipment:
     rolls: 1
-    roll-bonus: 0.5
+    roll-bonus: 0.2
     entries:
       wooden_pickaxe:
         material: WOODEN_PICKAXE

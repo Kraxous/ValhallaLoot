@@ -23,8 +23,8 @@ pools:
 
   # Nether-specific items
   nether_materials:
-    rolls: 2
-    roll-bonus: 0.3
+    rolls: 1
+    roll-bonus: 0.2
     entries:
       nether_wart:
         material: NETHER_WART

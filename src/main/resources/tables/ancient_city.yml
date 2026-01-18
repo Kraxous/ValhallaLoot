@@ -11,7 +11,7 @@ pools:
   # Silence armor trim - ULTRA RARE (1% vanilla rate, deepest loot)
   armor_trims_silence:
     rolls: 1
-    roll-bonus: 0.05
+    roll-bonus: 0.0
     entries:
       silence_trim:
         material: SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE
@@ -24,7 +24,7 @@ pools:
   # Ward armor trim (Ancient City specialty)
   armor_trims_ward:
     rolls: 1
-    roll-bonus: 0.1
+    roll-bonus: 0.0
     entries:
       ward_trim:
         material: WARD_ARMOR_TRIM_SMITHING_TEMPLATE
@@ -36,8 +36,8 @@ pools:
 
   # Diamonds - deepest treasure
   diamonds:
-    rolls: 2
-    roll-bonus: 0.3
+    rolls: 1
+    roll-bonus: 0.2
     entries:
       diamond:
         material: DIAMOND

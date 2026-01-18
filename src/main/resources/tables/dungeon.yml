@@ -10,8 +10,8 @@ respawn-variance: 10.0
 pools:
   # Basic weapons and armor
   equipment:
-    rolls: 2
-    roll-bonus: 0.4
+    rolls: 1
+    roll-bonus: 0.3
     entries:
       iron_sword:
         material: IRON_SWORD
@@ -44,8 +44,8 @@ pools:
 
   # Food supplies
   food:
-    rolls: 2
-    roll-bonus: 0.5
+    rolls: 1
+    roll-bonus: 0.3
     entries:
       bread:
         material: BREAD

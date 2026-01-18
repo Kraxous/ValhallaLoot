@@ -23,8 +23,8 @@ pools:
 
   # Diamonds and emeralds
   precious_gems:
-    rolls: 2
-    roll-bonus: 0.5
+    rolls: 1
+    roll-bonus: 0.3
     entries:
       diamond:
         material: DIAMOND
@@ -44,8 +44,8 @@ pools:
 
   # Iron and gold ingots
   metals:
-    rolls: 3
-    roll-bonus: 0.8
+    rolls: 1
+    roll-bonus: 0.4
     entries:
       iron_ingot:
         material: IRON_INGOT
@@ -63,8 +63,8 @@ pools:
 
   # TNT and prismarine
   special_materials:
-    rolls: 2
-    roll-bonus: 0.3
+    rolls: 1
+    roll-bonus: 0.2
     entries:
       tnt:
         material: TNT

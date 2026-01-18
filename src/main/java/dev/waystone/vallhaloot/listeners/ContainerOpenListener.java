@@ -3,6 +3,7 @@ package dev.waystone.vallhaloot.listeners;
 import dev.waystone.vallhaloot.ValhallaLootPlugin;
 import dev.waystone.vallhaloot.loot.*;
 import dev.waystone.vallhaloot.util.RateLimiter;
+import dev.waystone.vallhaloot.util.InventorySerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -128,11 +129,42 @@ public class ContainerOpenListener implements Listener {
         if (!player.hasPermission("valloot.table." + tableName)) {
             return;
         }
+        
+        // CRITICAL FIX: Check if this player already has loot generated for this container
+        boolean perPlayerMode = plugin.getConfigManager().isPerPlayerLootEnabled();
+        String existingLoot = perPlayerMode ? plugin.getStorageManager().getPlayerLoot(containerKey, player.getUniqueId()) : null;
+        
+        if (existingLoot != null) {
+            // Player already has loot for this container - restore it immediately
+            debugLimiter.execute(() -> {
+                plugin.getLogger().info("[LOOT RESTORE] Restoring existing loot for " + player.getName() + 
+                    " at " + containerKey);
+            });
+            
+            try {
+                // Verify holder still exists before accessing inventory
+                if (block.getState() instanceof BlockInventoryHolder validHolder) {
+                    org.bukkit.inventory.ItemStack[] items = InventorySerializer.fromBase64(existingLoot);
+                    Inventory realInventory = validHolder.getInventory();
+                    realInventory.clear();
+                    for (int i = 0; i < items.length && i < realInventory.getSize(); i++) {
+                        if (items[i] != null) {
+                            realInventory.setItem(i, items[i]);
+                        }
+                    }
+                } else {
+                    plugin.getLogger().warning("Container no longer valid when restoring loot at " + containerKey);
+                }
+            } catch (Exception e) {
+                plugin.getLogger().warning("Failed to restore player loot: " + e.getMessage());
+                // Fall through to generation if restore fails
+            }
+            return;
+        }
 
         // Check first-open gate
         if (table.isFirstOpenOnly()) {
-            boolean perPlayer = plugin.getConfigManager().isPerPlayerLootEnabled();
-            boolean opened = perPlayer
+            boolean opened = perPlayerMode
                 ? plugin.getStorageManager().isOpenedByPlayer(containerKey, player.getUniqueId())
                 : plugin.getStorageManager().isOpened(containerKey);
             if (opened && !player.hasPermission("valloot.bypass")) {
@@ -141,29 +173,26 @@ public class ContainerOpenListener implements Listener {
         }
 
         // BUGFIX #2: Handle per-player simultaneous opens properly
-        CompletableFuture<?> existing = inFlightLootGeneration.get(containerKey);
+        CompletableFuture<?> existing = inFlightLootGeneration.get(containerKey + ":" + player.getUniqueId());
         if (existing != null && !existing.isDone()) {
-            // Loot generation is already in progress for this container
-            // Chain another generation after the first completes for the second player
-            existing.thenRun(() -> {
-                if (Bukkit.getPlayer(context.getPlayerUUID()) != null) {
-                    generateLootAsync(containerKey, table, context, block);
-                }
-            });
+            // Loot generation is already in progress for this player+container
             return;
         }
 
-        // Start async loot generation
+        // Start async loot generation for this player
         generateLootAsync(containerKey, table, context, block);
     }
 
     /**
      * Generate loot asynchronously and apply it to the container.
      * This is the core pattern: compute async, apply sync.
+     * Uses per-player tracking to ensure each player gets their own unique loot.
      */
     private void generateLootAsync(String containerKey, LootTable table, LootContext context, Block block) {
+        // Use per-player key for tracking in-flight generation
+        String playerContainerKey = containerKey + ":" + context.getPlayerUUID();
         CompletableFuture<LootRollResult> future = new CompletableFuture<>();
-        inFlightLootGeneration.put(containerKey, future);
+        inFlightLootGeneration.put(playerContainerKey, future);
 
         plugin.getSchedulerHelper().runAsync(() -> {
             try {
@@ -203,54 +232,78 @@ public class ContainerOpenListener implements Listener {
     /**
      * Apply loot items to the container inventory.
      * MUST be called on main thread (Bukkit API access).
+     * 
+     * CRITICAL: This completely transforms the container's inventory contents
+     * for each player independently by storing and restoring per-player loot.
+     * This is the proper "client-side loot" approach like JustLootIt.
      */
     private void applyLootToContainer(Block block, LootRollResult result, String containerKey) {
         // BUGFIX #5: Check if chunk is still loaded before accessing block state
         if (!block.getChunk().isLoaded()) {
             plugin.debug(dev.waystone.vallhaloot.util.DebugLevel.HIGH,
                 "Chunk unloaded before loot callback; skipping application at %s", block.getLocation());
-            inFlightLootGeneration.remove(containerKey);
+            String playerContainerKey = containerKey + ":" + result.getContext().getPlayerUUID();
+            inFlightLootGeneration.remove(playerContainerKey);
             return;
         }
         
-        if (block.getState() instanceof BlockInventoryHolder) {
-            BlockInventoryHolder holder = (BlockInventoryHolder) block.getState();
+        if (block.getState() instanceof BlockInventoryHolder holder) {
             Inventory realInventory = holder.getInventory();
-
-            // Create a virtual inventory per-player and show rolled items (client-sided)
             Player viewer = Bukkit.getPlayer(result.getContext().getPlayerUUID());
+            
             if (viewer != null) {
-                @SuppressWarnings("deprecation")
-                Inventory virtual = Bukkit.createInventory(viewer, realInventory.getSize(), block.getType().name());
-                int nextSlot = 0;
+                // CRITICAL: Clear and populate the actual container with this player's loot
+                realInventory.clear();
+                
+                int slot = 0;
                 for (org.bukkit.inventory.ItemStack item : result.getItems()) {
-                    if (nextSlot >= virtual.getSize()) break;
-                    virtual.setItem(nextSlot++, item);
+                    if (slot >= realInventory.getSize()) break;
+                    realInventory.setItem(slot++, item);
                 }
-                viewer.openInventory(virtual);
+                
+                // CRITICAL: Save this player's loot so they see it consistently on future opens
+                boolean perPlayerMode = plugin.getConfigManager().isPerPlayerLootEnabled();
+                if (perPlayerMode) {
+                    try {
+                        org.bukkit.inventory.ItemStack[] contents = realInventory.getContents();
+                        String serialized = InventorySerializer.toBase64(contents);
+                        plugin.getStorageManager().savePlayerLoot(containerKey, viewer.getUniqueId(), serialized);
+                        
+                        debugLimiter.execute(() -> {
+                            plugin.getLogger().info("[LOOT SAVED] Stored per-player loot for " + viewer.getName() + 
+                                " at " + containerKey + " (" + result.getItems().size() + " items)");
+                        });
+                    } catch (Exception e) {
+                        plugin.getLogger().warning("Failed to serialize and save player loot: " + e.getMessage());
+                    }
+                }
+                
+                debugLimiter.execute(() -> {
+                    plugin.getLogger().info("[LOOT APPLIED] Container at " + block.getLocation() + 
+                        " transformed with " + result.getItems().size() + " items for " + viewer.getName());
+                });
+                
+                // Mark as opened (per-player tracking)
+                Vector blockVec = block.getLocation().toVector();
+                plugin.getStorageManager().markAsOpenedByPlayer(containerKey,
+                    block.getWorld().getUID().toString(),
+                    blockVec.getBlockX(), blockVec.getBlockY(), blockVec.getBlockZ(),
+                    result.getContext().getPlayerUUID());
             }
-
-            // Mark as opened (per-player)
-            Vector blockVec = block.getLocation().toVector();
-            plugin.getStorageManager().markAsOpenedByPlayer(containerKey,
-                block.getWorld().getUID().toString(),
-                blockVec.getBlockX(), blockVec.getBlockY(), blockVec.getBlockZ(),
-                result.getContext().getPlayerUUID());
-
-            debugLimiter.execute(() -> {
-                plugin.getLogger().info("[LOOT APPLIED] Opened virtual inventory with " + result.getItems().size() + 
-                    " items for player at container " + block.getLocation());
-            });
         }
 
-        // Clean up in-flight tracking
-        inFlightLootGeneration.remove(containerKey);
+        // Clean up in-flight tracking (use per-player key)
+        String playerContainerKey = containerKey + ":" + result.getContext().getPlayerUUID();
+        inFlightLootGeneration.remove(playerContainerKey);
     }
 
     /**
      * Determine which loot table should be used for this block.
      * Configurable by block type, biome, world, etc.
-     * BUGFIX #1: Split into fast (main thread) and slow (async) detection
+     * 
+     * CRITICAL FIX: Run slow detection synchronously on cache miss to ensure
+     * correct loot table on first open (not just a race-condition fallback to "common").
+     * This only happens once per unique container location.
      */
     private String determineTableName(Block block) {
         // Try fast structure detection first (minimal main thread impact)
@@ -259,21 +312,22 @@ public class ContainerOpenListener implements Listener {
             return structureTable;
         }
         
-        // Queue detailed detection async (avoid main thread freeze)
+        // Check cache for previous slow detection result
         String blockKey = block.getX() + ":" + block.getY() + ":" + block.getZ();
-        if (!structureCache.containsKey(blockKey)) {
-            plugin.getSchedulerHelper().runAsync(() -> {
-                String slow = detectStructureTableSlow(block);
-                if (slow != null) {
-                    structureCache.put(blockKey, slow);
-                }
-            });
-        } else {
-            // Use cached result if available
+        if (structureCache.containsKey(blockKey)) {
             return structureCache.get(blockKey);
         }
         
-        // Fall back to block type mapping
+        // CRITICAL: Run slow detection synchronously on first check
+        // This ensures correct loot on first open, not defaulting to "common"
+        // Performance: Only happens once per container location, results are cached
+        String slowResult = detectStructureTableSlow(block);
+        if (slowResult != null) {
+            structureCache.put(blockKey, slowResult);
+            return slowResult;
+        }
+        
+        // Fall back to block type mapping only if no structure detected
         return switch (block.getType()) {
             case BARREL -> "common";
             case CHEST -> "common";
@@ -285,24 +339,29 @@ public class ContainerOpenListener implements Listener {
     /**
      * Fast structure detection (main thread safe, minimal performance impact).
      * Only checks immediate surroundings and common patterns.
+     * 
+     * CRITICAL: Avoid dimension-wide assumptions (not all Nether chests are fortresses!)
      */
     private String detectStructureTableFast(Block block) {
         String biome = block.getBiome().toString().toLowerCase();
         
-        // Quick checks that don't require scanning
-        if (biome.contains("desert")) {
+        // Only use biome detection for structures that are biome-exclusive
+        // Removed dimension-wide checks - they're too broad and inaccurate
+        // Examples of removed bad logic:
+        // - All Nether chests != Nether Fortress (could be Bastion, Ruined Portal, etc.)
+        // - All End chests != End City (could be naturally generated, player-placed, etc.)
+        
+        // Biome-specific structures (more reliable)
+        if (biome.contains("desert") && !biome.contains("cold")) {
+            // Desert Pyramids only spawn in warm desert biomes
             return "desert_pyramid";
         }
         if (biome.contains("jungle")) {
+            // Jungle Temples only in jungle biomes
             return "jungle_temple";
         }
-        if (block.getWorld().getName().toLowerCase().contains("nether")) {
-            return "nether_fortress";  // Nether biome → likely fortress/bastion
-        }
-        if (block.getWorld().getName().toLowerCase().contains("end")) {
-            return "end_city";
-        }
         
+        // Don't assume structure from dimension alone - let slow detection handle it
         return null;
     }
 

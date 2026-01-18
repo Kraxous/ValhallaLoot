@@ -36,8 +36,8 @@ pools:
 
   # Gold (bastions have lots of gold)
   gold:
-    rolls: 2
-    roll-bonus: 0.4
+    rolls: 1
+    roll-bonus: 0.3
     entries:
       gold_ingot:
         material: GOLD_INGOT

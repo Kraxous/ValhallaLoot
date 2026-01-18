@@ -14,8 +14,8 @@ respawn-variance: 15.0
 pools:
   # Enchanted books (highest priority in strongholds)
   enchantments:
-    rolls: 2
-    roll-bonus: 0.5
+    rolls: 1
+    roll-bonus: 0.3
     entries:
       enchanted_book_protection:
         material: ENCHANTED_BOOK
@@ -90,7 +90,7 @@ pools:
   # Enchanted golden apple (rare version)
   special_food:
     rolls: 1
-    roll-bonus: 0.08
+    roll-bonus: 0.0
     entries:
       enchanted_golden_apple:
         material: ENCHANTED_GOLDEN_APPLE

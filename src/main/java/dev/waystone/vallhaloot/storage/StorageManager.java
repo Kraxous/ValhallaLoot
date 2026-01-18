@@ -18,6 +18,8 @@ public class StorageManager {
     // BUGFIX #4: Bound memory caches with LRU eviction (max 100k entries each)
     private final java.util.Map<String, Long> openMarkers;
     private final java.util.Map<String, ConcurrentHashMap<UUID, Long>> playerOpenMarkers;
+    // CRITICAL: Cache for player loot to avoid main thread database I/O
+    private final java.util.Map<String, ConcurrentHashMap<UUID, String>> playerLootCache;
 
     public StorageManager(ValhallaLootPlugin plugin) {
         this.plugin = plugin;
@@ -32,6 +34,13 @@ public class StorageManager {
             new java.util.LinkedHashMap<String, ConcurrentHashMap<UUID, Long>>(16, 0.75f, true) {
                 protected boolean removeEldestEntry(java.util.Map.Entry<String, ConcurrentHashMap<UUID, Long>> eldest) {
                     return size() > 100000;
+                }
+            }
+        );
+        this.playerLootCache = java.util.Collections.synchronizedMap(
+            new java.util.LinkedHashMap<String, ConcurrentHashMap<UUID, String>>(16, 0.75f, true) {
+                protected boolean removeEldestEntry(java.util.Map.Entry<String, ConcurrentHashMap<UUID, String>> eldest) {
+                    return size() > 50000; // Lower limit since loot data is larger
                 }
             }
         );
@@ -78,6 +87,14 @@ public class StorageManager {
                 stmt.execute("CREATE TABLE IF NOT EXISTS original_inventories (" +
                         "container_key TEXT PRIMARY KEY," +
                         "data TEXT NOT NULL)");
+                
+                // NEW: Per-player loot storage for true client-side loot
+                stmt.execute("CREATE TABLE IF NOT EXISTS player_loot (" +
+                        "container_key TEXT NOT NULL," +
+                        "player_uuid TEXT NOT NULL," +
+                        "loot_data TEXT NOT NULL," +
+                        "generated_at BIGINT NOT NULL," +
+                        "PRIMARY KEY(container_key, player_uuid))");
             }
 
             plugin.getLogger().info("Database initialized successfully");
@@ -376,6 +393,67 @@ public class StorageManager {
             plugin.getLogger().warning("Failed to check if world has converted containers: " + e.getMessage());
             return false;
         }
+    }
+    
+    /**
+     * Save per-player loot data for a container.
+     * This allows each player to have their own unique loot in the same container.
+     */
+    public void savePlayerLoot(String containerKey, UUID playerUUID, String lootData) {
+        // Update cache immediately (main thread safe)
+        playerLootCache.computeIfAbsent(containerKey, k -> new ConcurrentHashMap<>())
+            .put(playerUUID, lootData);
+        
+        // Persist to database async
+        if (dbConnection == null) return;
+        plugin.getSchedulerHelper().runAsync(() -> {
+            try (PreparedStatement pstmt = dbConnection.prepareStatement(
+                    "INSERT OR REPLACE INTO player_loot (container_key, player_uuid, loot_data, generated_at) " +
+                    "VALUES (?, ?, ?, ?)")) {
+                pstmt.setString(1, containerKey);
+                pstmt.setString(2, playerUUID.toString());
+                pstmt.setString(3, lootData);
+                pstmt.setLong(4, System.currentTimeMillis());
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                plugin.getLogger().warning("Failed to save player loot: " + e.getMessage());
+            }
+        });
+    }
+    
+    /**
+     * Get per-player loot data for a container.
+     * Returns null if no loot has been generated for this player yet.
+     * CRITICAL: Uses in-memory cache to avoid main thread database I/O.
+     */
+    public String getPlayerLoot(String containerKey, UUID playerUUID) {
+        ConcurrentHashMap<UUID, String> map = playerLootCache.get(containerKey);
+        if (map != null) {
+            return map.get(playerUUID);
+        }
+        
+        // Not in cache - query database async and return null for now
+        // Next open will have the cached value
+        if (dbConnection != null) {
+            plugin.getSchedulerHelper().runAsync(() -> {
+                try (PreparedStatement pstmt = dbConnection.prepareStatement(
+                        "SELECT loot_data FROM player_loot WHERE container_key = ? AND player_uuid = ?")) {
+                    pstmt.setString(1, containerKey);
+                    pstmt.setString(2, playerUUID.toString());
+                    try (ResultSet rs = pstmt.executeQuery()) {
+                        if (rs.next()) {
+                            String lootData = rs.getString("loot_data");
+                            playerLootCache.computeIfAbsent(containerKey, k -> new ConcurrentHashMap<>())
+                                .put(playerUUID, lootData);
+                        }
+                    }
+                } catch (SQLException e) {
+                    plugin.getLogger().warning("Failed to load player loot from database: " + e.getMessage());
+                }
+            });
+        }
+        
+        return null;
     }
 
     public void shutdown() {
